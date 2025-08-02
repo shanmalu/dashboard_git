@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>온실·사무실·집 대시보드</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 16px; background:#f7f7f9; }
+  .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .card { background:white; border-radius:16px; padding:16px; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+  .title { font-size:18px; margin-bottom:8px; }
+  .value { font-size:24px; font-weight:700; }
+  .label { color:#666; font-size:14px; }
+  .time { font-size:14px; color:#444; margin:8px 0; }
+  header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  h1 { font-size:22px; margin:0;}
+  .clock { font-size:18px; color:#333; }
+</style>
+<body>
+<header>
+  <h1>실시간 대시보드 (채널2/3/4)</h1>
+  <div class="clock" id="clock">--:--:--</div>
+</header>
+
+<div class="grid">
+  <div class="card" id="office">
+    <div class="title">사무실 (채널2)</div>
+    <div class="value" id="o_lux">-- Lux</div>
+    <div class="value" id="o_temp">-- ℃</div>
+    <div class="value" id="o_hum">-- %</div>
+    <div class="time" id="o_time">업데이트: --</div>
+    //<div class="label">Field1: 조도 · Field2: 온도 · Field3: 습도</div>
+  </div>
+
+  <div class="card" id="greenhouse">
+    <div class="title">온실 (채널3)</div>
+    <div class="value" id="g_lux">-- lx</div>
+    <div class="value" id="g_temp">-- ℃</div>
+    <div class="value" id="g_hum">-- %</div>
+    <div class="time" id="g_time">업데이트: --</div>
+    //<div class="label">Field1: 조도 · Field2: 온도 · Field3: 습도</div>
+  </div>
+
+  <div class="card" id="home">
+    <div class="title">집 (채널4)</div>
+    <div class="value" id="h_lux">-- lx</div>
+    <div class="value" id="h_temp">-- ℃</div>
+    <div class="value" id="h_hum">-- %</div>
+    <div class="time" id="h_time">업데이트: --</div>
+    //<div class="label">Field1: 조도 · Field2: 온도 · Field3: 습도</div>
+  </div>
+</div>
+
+<script>
+const CHANNELS = {
+  office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" }, // 채널2
+  greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" }, // 채널3
+  home:       { id: 3020435, read_key: "DQW527FW43D0I249" }  // 채널4
+};
+
+function qsel(id){ return document.getElementById(id); }
+
+function fmtTime(iso){
+  try { const d = new Date(iso); return d.toLocaleString(); } catch(e){ return iso; }
+}
+
+async function fetchLastFeed({id, read_key}) {
+  const keyParam = read_key ? `&api_key=${read_key}` : "";
+  const url = `https://api.thingspeak.com/channels/${id}/feeds/last.json?${keyParam}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function update() {
+  try {
+    const [o, g, h] = await Promise.all([
+      fetchLastFeed(CHANNELS.office),
+      fetchLastFeed(CHANNELS.greenhouse),
+      fetchLastFeed(CHANNELS.home),
+    ]);
+    // 사무실
+    qsel("o_lux").textContent  = `${Math.round(+o.field1||0)} lx`;
+    qsel("o_temp").textContent = `${(+o.field2||0).toFixed(1)} ℃`;
+    qsel("o_hum").textContent  = `${Math.round(+o.field3||0)} %`;
+    qsel("o_time").textContent = `업데이트: ${fmtTime(o.created_at)}`;
+
+    // 온실
+    qsel("g_lux").textContent  = `${Math.round(+g.field1||0)} lx`;
+    qsel("g_temp").textContent = `${(+g.field2||0).toFixed(1)} ℃`;
+    qsel("g_hum").textContent  = `${Math.round(+g.field3||0)} %`;
+    qsel("g_time").textContent = `업데이트: ${fmtTime(g.created_at)}`;
+
+    // 집
+    qsel("h_lux").textContent  = `${Math.round(+h.field1||0)} lx`;
+    qsel("h_temp").textContent = `${(+h.field2||0).toFixed(1)} ℃`;
+    qsel("h_hum").textContent  = `${Math.round(+h.field3||0)} %`;
+    qsel("h_time").textContent = `업데이트: ${fmtTime(h.created_at)}`;
+  } catch (e) {
+    console.log("업데이트 오류:", e);
+  }
+}
+
+function tickClock() {
+  const d = new Date();
+  qsel("clock").textContent = d.toLocaleString();
+}
+
+setInterval(tickClock, 1000);
+tickClock();
+
+update();
+setInterval(update, 15000); // 15초마다 갱신
+</script>
+</body>
+</html>
