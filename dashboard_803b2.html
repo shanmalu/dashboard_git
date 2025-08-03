@@ -110,7 +110,7 @@ async function update() {
     qsel("g_hum").textContent  = `습도: ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
     
-    qsel("o_lux").textContent  = `조명 ${Math.round(+o.field1||0)} Lux`;
+    qsel("o_lux").textContent  = `조명: ${Math.round(+o.field1||0)} Lux`;
     qsel("o_temp").textContent = `온도: ${(+o.field2||0).toFixed(1)} ℃`;
     qsel("o_hum").textContent  = `습도: ${Math.round(+o.field3||0)} %`;
     qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`;
@@ -136,4 +136,5 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
 
