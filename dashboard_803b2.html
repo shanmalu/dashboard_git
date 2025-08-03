@@ -8,8 +8,8 @@
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
   .card { background:white; border-radius:14px; padding:10px; box-shadow:0 6px 18px rgba(0,0,0,.06); }
   .title { font-size:18px; margin-bottom:8px; }
-  .value { font-size:20px; font-weight:700;margin-bottom:8px; }
-  .label { color:#666; font-size:14px; }
+  .value { font-size:20px; font-weight:700; margin-bottom:8px; }
+  .label { color:#666; font-size:14px; margin-bottom:4px; }
   .time { font-size:14px; color:#444; margin:8px 0; }
   header { 
     display:flex; align-items:center; 
@@ -25,7 +25,7 @@
 <body>
 <header>
    <div class="header-box"><h1>📊실시간 측정치</h1></div>
-   <div class="header-box">🕒<div class="clock" id="clock">--:--:--</div></div>
+   <div class="header-box"> 🕒 ⏰ <div class="clock" id="clock">--:--:--</div></div>
 </header>
 
 <div class="grid">
@@ -141,6 +141,7 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
 
 
 
