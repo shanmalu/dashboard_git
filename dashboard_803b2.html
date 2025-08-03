@@ -99,7 +99,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [o, g, h] = await Promise.all([
+    const [g, o, h] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home),
@@ -136,6 +136,7 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
 
 
 
