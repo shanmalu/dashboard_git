@@ -28,15 +28,7 @@
     <div class="value" id="g_temp">-- ℃</div>
     <div class="value" id="g_hum">-- %</div>
     <div class="time" id="g_time">업데이트: --</div>
-    </div>
-  
-  <div class="card" id="office">
-    <div class="title">사무실(채널2)</div>
-    <div class="value" id="o_lux">-- lx</div>
-    <div class="value" id="o_temp">-- ℃</div>
-    <div class="value" id="o_hum">-- %</div>
-    <div class="time" id="o_time">업데이트: --</div>
-    </div>
+    </div> 
 
   <div class="card" id="home">
     <div class="title">집 (채널4)</div>
@@ -44,6 +36,14 @@
     <div class="value" id="h_temp">-- ℃</div>
     <div class="value" id="h_hum">-- %</div>
     <div class="time" id="h_time">업데이트: --</div>
+  </div>
+  
+  <div class="card" id="office">
+    <div class="title">사무실(채널2)</div>
+    <div class="value" id="o_lux">-- lx</div>
+    <div class="value" id="o_temp">-- ℃</div>
+    <div class="value" id="o_hum">-- %</div>
+    <div class="time" id="o_time">업데이트: --</div>
     <div class="label">Field1:조명·Field2:온도·Field3:습도</div>
     <div class="label">File:803b2 (803b 수정) </div>
   </div>
@@ -98,26 +98,26 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h] = await Promise.all([
+    const [g, h, o] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
+       fetchLastFeed(CHANNELS.home),     
       fetchLastFeed(CHANNELS.office),
-      fetchLastFeed(CHANNELS.home),
     ]);
 
     qsel("g_lux").textContent  = ` 조명 ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 온도 ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 습도 ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = ` 업데이트: ${fmtDateTime(g.created_at)}`;
-    
-    qsel("o_lux").textContent  = ` 조명 ${Math.round(+o.field1||0)} Lux`;
-    qsel("o_temp").textContent = ` 온도 ${(+o.field2||0).toFixed(1)} ℃`;
-    qsel("o_hum").textContent  = ` 습도 ${Math.round(+o.field3||0)} %`;
-    qsel("o_time").textContent = ` 업데이트: ${fmtDateTime(o.created_at)}`;
 
     qsel("h_lux").textContent  = ` 조명 ${Math.round(+h.field1||0)} Lux`;
     qsel("h_temp").textContent = ` 온도 ${(+h.field2||0).toFixed(1)} ℃`;
     qsel("h_hum").textContent  = ` 습도 ${Math.round(+h.field3||0)} %`;
     qsel("h_time").textContent = ` 업데이트: ${fmtDateTime(h.created_at)}`;
+  
+    qsel("o_lux").textContent  = ` 조명 ${Math.round(+o.field1||0)} Lux`;
+    qsel("o_temp").textContent = ` 온도 ${(+o.field2||0).toFixed(1)} ℃`;
+    qsel("o_hum").textContent  = ` 습도 ${Math.round(+o.field3||0)} %`;
+    qsel("o_time").textContent = ` 업데이트: ${fmtDateTime(o.created_at)}`; 
   } catch (e) {
     console.log("업데이트 오류:", e);
   }
@@ -135,7 +135,3 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
-
-
-
-
