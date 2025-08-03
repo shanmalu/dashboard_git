@@ -111,8 +111,8 @@ async function update() {
       fetchLastFeed(CHANNELS.office),
     ]);
 
-    qsel("g_lux").textContent  = ` &nbsp;&nbsp; 조명 ${Math.round(+g.field1||0)} Lux`;
-    qsel("g_temp").textContent = ` &nbsp;&nbsp; 온도 ${(+g.field2||0).toFixed(1)} ℃`;
+    qsel("g_lux").textContent  = ` 조명 ${Math.round(+g.field1||0)} Lux`;
+    qsel("g_temp").textContent = ` 온도 ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 습도 ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
 
@@ -142,6 +142,7 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
 
 
 
