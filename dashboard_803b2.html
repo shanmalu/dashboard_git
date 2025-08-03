@@ -52,8 +52,8 @@
 
 <script>
 const CHANNELS = {
-  office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+  office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" }
 };
 
@@ -100,8 +100,8 @@ async function fetchLastFeed({id, read_key}) {
 async function update() {
   try {
     const [o, g, h] = await Promise.all([
+      fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
-      fetchLastFeed(CHANNELS.greenhouse),
       fetchLastFeed(CHANNELS.home),
     ]);
 
@@ -137,6 +137,7 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
 
 
 
