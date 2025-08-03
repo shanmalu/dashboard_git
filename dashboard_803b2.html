@@ -105,20 +105,19 @@ async function update() {
       fetchLastFeed(CHANNELS.home),
     ]);
 
-
-    qsel("g_lux").textContent  = `${Math.round(+g.field1||0)} Lux`;
-    qsel("g_temp").textContent = `${(+g.field2||0).toFixed(1)} ℃`;
-    qsel("g_hum").textContent  = `${Math.round(+g.field3||0)} %`;
+    qsel("g_lux").textContent  = `조명: ${Math.round(+g.field1||0)} Lux`;
+    qsel("g_temp").textContent = `온도: ${(+g.field2||0).toFixed(1)} ℃`;
+    qsel("g_hum").textContent  = `습도: ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
     
-    qsel("o_lux").textContent  = `${Math.round(+o.field1||0)} Lux`;
-    qsel("o_temp").textContent = `${(+o.field2||0).toFixed(1)} ℃`;
-    qsel("o_hum").textContent  = `${Math.round(+o.field3||0)} %`;
+    qsel("o_lux").textContent  = `조명 ${Math.round(+o.field1||0)} Lux`;
+    qsel("o_temp").textContent = `온도: ${(+o.field2||0).toFixed(1)} ℃`;
+    qsel("o_hum").textContent  = `습도: ${Math.round(+o.field3||0)} %`;
     qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`;
 
-    qsel("h_lux").textContent  = `${Math.round(+h.field1||0)} Lux`;
-    qsel("h_temp").textContent = `${(+h.field2||0).toFixed(1)} ℃`;
-    qsel("h_hum").textContent  = `${Math.round(+h.field3||0)} %`;
+    qsel("h_lux").textContent  = `조명: ${Math.round(+h.field1||0)} Lux`;
+    qsel("h_temp").textContent = `온도: ${(+h.field2||0).toFixed(1)} ℃`;
+    qsel("h_hum").textContent  = `온도: ${Math.round(+h.field3||0)} %`;
     qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -137,3 +136,4 @@ setInterval(update, 15000);
 </script>
 </body>
 </html>
+
