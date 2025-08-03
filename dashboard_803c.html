@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>온실·집·사무실 대시보드</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .card { background:white; border-radius:16px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,.06); text-align:center; }
+  .title { font-size:18px; margin-bottom:8px; }
+  .value { font-size:24px; font-weight:700; margin: 4px 0; }
+  .label { color:#666; font-size:12px; }
+  .time { font-size:14px; color:#444; margin:8px 0; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .header-box {
+    width: 50%;
+    text-align: center;
+  }
+  h1 { font-size:22px; margin:0; }
+  .clock { font-size:20px; color:#333; }
+</style>
+
+<body>
+  <header>
+    <div class="header-box"><h1>실시간 측정치</h1></div>
+    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+  </header>
+
+  <div class="grid">
+    <div class="card" id="greenhouse">
+      <div class="title">온실 (채널3)</div>
+      <div class="value" id="g_lux">-- lx</div>
+      <div class="value" id="g_temp">-- ℃</div>
+      <div class="value" id="g_hum">-- %</div>
+      <div class="time" id="g_time">업데이트: --</div>
+    </div> 
+
+    <div class="card" id="home">
+      <div class="title">집 (채널4)</div>
+      <div class="value" id="h_lux">-- lx</div>
+      <div class="value" id="h_temp">-- ℃</div>
+      <div class="value" id="h_hum">-- %</div>
+      <div class="time" id="h_time">업데이트: --</div>
+    </div>
+    
+    <div class="card" id="office">
+      <div class="title">사무실(채널2)</div>
+      <div class="value" id="o_lux">-- lx</div>
+      <div class="value" id="o_temp">-- ℃</div>
+      <div class="value" id="o_hum">-- %</div>
+      <div class="time" id="o_time">업데이트: --</div>
+    </div>
+  </div>
+
+  <script>
+    const CHANNELS = {
+      greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+      office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+      home:       { id: 3020435, read_key: "DQW527FW43D0I249" }
+    };
+
+    function qsel(id){ return document.getElementById(id); }
+
+    function pad(n) {
+      return n.toString().padStart(2, '0');
+    }
+
+    function fmtDateTime(dateStr) {
+      try {
+        const d = new Date(dateStr);
+        const y = d.getFullYear();
+        const m = d.getMonth() + 1;
+        const day = d.getDate();
+        const h = pad(d.getHours());
+        const min = pad(d.getMinutes());
+        const s = pad(d.getSeconds());
+        return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    function fmtClockTime() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = d.getMonth() + 1;
+      const day = d.getDate();
+      const h = pad(d.getHours());
+      const min = pad(d.getMinutes());
+      const s = pad(d.getSeconds());
+      return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+    }
+
+    async function fetchLastFeed({id, read_key}) {
+      const keyParam = read_key ? `&api_key=${read_key}` : "";
+      const url = `https://api.thingspeak.com/channels/${id}/feeds/last.json?${keyParam}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    }
+
+    async function update() {
+      try {
+        const [g, h, o] = await Promise.all([
+          fetchLastFeed(CHANNELS.greenhouse), 
+          fetchLastFeed(CHANNELS.home),     
+          fetchLastFeed(CHANNELS.office),
+        ]);
+
+        qsel("g_lux").textContent  = `조명 ${Math.round(+g.field1||0)} Lux`;
+        qsel("g_temp").textContent = `온도 ${(+g.field2||0).toFixed(1)} ℃`;
+        qsel("g_hum").textContent  = `습도 ${Math.round(+g.field3||0)} %`;
+        qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
+
+        qsel("h_lux").textContent  = `조명 ${Math.round(+h.field1||0)} Lux`;
+        qsel("h_temp").textContent = `온도 ${(+h.field2||0).toFixed(1)} ℃`;
+        qsel("h_hum").textContent  = `습도 ${Math.round(+h.field3||0)} %`;
+        qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
+      
+        qsel("o_lux").textContent  = `조명 ${Math.round(+o.field1||0)} Lux`;
+        qsel("o_temp").textContent = `온도 ${(+o.field2||0).toFixed(1)} ℃`;
+        qsel("o_hum").textContent  = `습도 ${Math.round(+o.field3||0)} %`;
+        qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
+      } catch (e) {
+        console.log("업데이트 오류:", e);
+      }
+    }
+
+    function tickClock() {
+      qsel("clock").textContent = fmtClockTime();
+    }
+
+    setInterval(tickClock, 1000);
+    tickClock();
+
+    update();
+    setInterval(update, 15000);
+  </script>
+</body>
+</html>
