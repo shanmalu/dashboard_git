@@ -10,7 +10,7 @@
   .title { font-size:18px; margin-bottom:6px; }
   .value { font-size:20px; font-weight:700; margin-bottom:8px; }
   .label { color:#666; font-size:14px; margin-bottom:2px; }
-  .time { font-size:14px; color:#444; margin:2px 0; } 
+  .time { font-size:14px; color:#444; margin:2px 0; }
   
   header { 
     display:flex; align-items:center; 
@@ -31,7 +31,7 @@
 <div class="grid">
   <div class="card" id="greenhouse">
     <div class="title">🌿온실(채널3)</div>
-    <div class="value" id="g_lux">-- lx</div>
+    <div class="value" id="g_lux">-- Lx</div>
     <div class="value" id="g_temp">-- ℃</div>
     <div class="value" id="g_hum">-- %</div>
     <div class="time" id="g_time">업데이트: --</div>
@@ -39,7 +39,7 @@
 
   <div class="card" id="home">
     <div class="title">🏢아파트(채널4)</div>
-    <div class="value" id="h_lux">-- lx</div>
+    <div class="value" id="h_lux">-- Lx</div>
     <div class="value" id="h_temp">-- ℃</div>
     <div class="value" id="h_hum">-- %</div>
     <div class="time" id="h_time">업데이트: --</div>
@@ -47,7 +47,7 @@
   
   <div class="card" id="office">
     <div class="title">🏠사무실(채널2)</div>
-    <div class="value" id="o_lux">-- lx</div>
+    <div class="value" id="o_lux">-- Lx</div>
     <div class="value" id="o_temp">-- ℃</div>
     <div class="value" id="o_hum">-- %</div>
     <div class="time" id="o_time">업데이트: --</div>
@@ -55,7 +55,7 @@
 
   <div class="card" id="veranda">
     <div class="title">🏢베란다(채널1)</div>
-    <div class="value" id="v_lux">-- lx</div>
+    <div class="value" id="v_lux">-- Lx</div>
     <div class="value" id="v_temp">-- ℃</div>
     <div class="value" id="v_hum">-- %</div>
     <div class="time" id="v_time">업데이트: --</div>
@@ -67,7 +67,7 @@ const CHANNELS = {
   greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" }
-  varanda:     { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" }
+  varanda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" }
 };
 
 function qsel(id){ return document.getElementById(id); }
@@ -113,7 +113,7 @@ async function update() {
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.home),     
       fetchLastFeed(CHANNELS.office),
-       fetchLastFeed(CHANNELS.veranda),     
+      fetchLastFeed(CHANNELS.veranda),     
     ]);
 
     // 온실
@@ -158,6 +158,7 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
 
 
