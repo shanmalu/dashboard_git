@@ -59,10 +59,7 @@
     <div class="value" id="v_temp">-- ℃</div>
     <div class="value" id="v_hum">-- %</div>
     <div class="time" id="v_time">업데이트: --</div>
-    <div class="label">File:814 (803b2에 채널1 추가) </div>
   </div>
-
-
 </div>
 
 <script>
@@ -74,10 +71,7 @@ const CHANNELS = {
 };
 
 function qsel(id){ return document.getElementById(id); }
-
-function pad(n) {
-  return n.toString().padStart(2, '0');
-}
+function pad(n) { return n.toString().padStart(2, '0'); }
 
 function fmtDateTime(dateStr) {
   try {
@@ -122,21 +116,25 @@ async function update() {
        fetchLastFeed(CHANNELS.veranda),     
     ]);
 
+    // 온실
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
 
+    // 집
     qsel("h_lux").textContent  = ` 💡조명: ${Math.round(+h.field1||0)} Lux`;
     qsel("h_temp").textContent = ` 🌡️온도: ${(+h.field2||0).toFixed(1)} ℃`;
     qsel("h_hum").textContent  = ` 💧습도: ${Math.round(+h.field3||0)} %`;
     qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
-  
+
+    // 사무실
     qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
     qsel("o_temp").textContent = ` 🌡️온도: ${(+o.field2||0).toFixed(1)} ℃`;
     qsel("o_hum").textContent  = ` 💧습도: ${Math.round(+o.field3||0)} %`;
     qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
 
+    // 베란다다
     qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v.field1||0)} Lux`;
     qsel("v_temp").textContent = ` 🌡️온도: ${(+v.field2||0).toFixed(1)} ℃`;
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
@@ -157,9 +155,9 @@ tickClock();
 update();
 setInterval(update, 15000);
 </script>
+  
 </body>
 </html>
-
 
 
 
