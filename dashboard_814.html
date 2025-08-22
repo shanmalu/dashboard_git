@@ -36,14 +36,6 @@
     <div class="value" id="g_hum">-- %</div>
     <div class="time" id="g_time">업데이트: --</div>
     </div> 
-
-  <div class="card" id="home">
-    <div class="title">🏢아파트(채널4)</div>
-    <div class="value" id="h_lux">-- Lx</div>
-    <div class="value" id="h_temp">-- ℃</div>
-    <div class="value" id="h_hum">-- %</div>
-    <div class="time" id="h_time">업데이트: --</div>
-  </div>
   
   <div class="card" id="office">
     <div class="title">🏠사무실(채널2)</div>
@@ -53,6 +45,14 @@
     <div class="time" id="o_time">업데이트: --</div>
     </div>
 
+  <div class="card" id="home">
+    <div class="title">🏢아파트(채널4)</div>
+    <div class="value" id="h_lux">-- Lx</div>
+    <div class="value" id="h_temp">-- ℃</div>
+    <div class="value" id="h_hum">-- %</div>
+    <div class="time" id="h_time">업데이트: --</div>
+  </div>
+  
   <div class="card" id="veranda">
     <div class="title">🏢베란다(채널1)814</div>
     <div class="value" id="v_lux">-- Lx</div>
@@ -109,7 +109,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, h, o, v] = await Promise.all([
+    const [g, o, h, v] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.home),     
       fetchLastFeed(CHANNELS.office),
@@ -121,6 +121,13 @@ async function update() {
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
+    
+    // 사무실
+    qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
+    qsel("o_temp").textContent = ` 🌡️온도: ${(+o.field2||0).toFixed(1)} ℃`;
+    qsel("o_hum").textContent  = ` 💧습도: ${Math.round(+o.field3||0)} %`;
+    qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
+
 
     // 집
     qsel("h_lux").textContent  = ` 💡조명: ${Math.round(+h.field1||0)} Lux`;
@@ -128,13 +135,7 @@ async function update() {
     qsel("h_hum").textContent  = ` 💧습도: ${Math.round(+h.field3||0)} %`;
     qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
 
-    // 사무실
-    qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
-    qsel("o_temp").textContent = ` 🌡️온도: ${(+o.field2||0).toFixed(1)} ℃`;
-    qsel("o_hum").textContent  = ` 💧습도: ${Math.round(+o.field3||0)} %`;
-    qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
-
-    // 베란다다
+    // 베란다
     qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v.field1||0)} Lux`;
     qsel("v_temp").textContent = ` 🌡️온도: ${(+v.field2||0).toFixed(1)} ℃`;
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
@@ -158,6 +159,7 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
 
 
