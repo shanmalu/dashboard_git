@@ -154,10 +154,10 @@ async function update() {
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
     // 베란다v2 추가822
-    qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v2.field4||0)} Lux`;
-    qsel("v_temp").textContent = ` 🌡️온도: ${(+v2.field5||0).toFixed(1)} ℃`;
-    qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v2.field6||0)} %`;
-    qsel("v_time").textContent = `업데이트: ${fmtDateTime(v2.created_at)}`;
+    qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v.field4||0)} Lux`;
+    qsel("v_temp").textContent = ` 🌡️온도: ${(+v.field5||0).toFixed(1)} ℃`;
+    qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field6||0)} %`;
+    qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -177,6 +177,7 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
 
 
