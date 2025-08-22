@@ -62,7 +62,7 @@
   </div>
   
   <div class="card" id="veranda">
-    <div class="title">🏢베란다2(채널1)814</div>
+    <div class="title">🏢베란다2(채널1)추가</div>
     <div class="value" id="v2_lux">-- Lx</div>
     <div class="value" id="v2_temp">-- ℃</div>
     <div class="value" id="v2_hum">-- %</div>
@@ -121,10 +121,11 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v] = await Promise.all([
+    const [g, o, h, v, v2] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.home),     
       fetchLastFeed(CHANNELS.office),
+      fetchLastFeed(CHANNELS.veranda),
       fetchLastFeed(CHANNELS.veranda),     
     ]);
 
@@ -176,4 +177,5 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
