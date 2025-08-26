@@ -2,7 +2,7 @@
 <html lang="ko">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>814.채널4개.조명온습도</title>
+<title>814.채널5개.조명온습도</title>
 <style>
   body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
@@ -76,7 +76,8 @@ const CHANNELS = {
   greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
-  veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" }
+  veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+  navch:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
 
 function qsel(id){ return document.getElementById(id); }
@@ -123,7 +124,7 @@ async function update() {
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
       fetchLastFeed(CHANNELS.veranda),
-      fetchLastFeed(CHANNELS.veranda),     
+      fetchLastFeed(CHANNELS.navch),     
     ]);
 
     // 온실g
@@ -174,3 +175,4 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
