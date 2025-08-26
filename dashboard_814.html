@@ -119,7 +119,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v, v2] = await Promise.all([
+    const [g, o, h, v, n2] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
@@ -152,10 +152,10 @@ async function update() {
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
     // 베란다v2 추가822
-    qsel("v2_lux").textContent  = ` 💡조명: ${Math.round(+v2.field4||0)} Lux`;
-    qsel("v2_temp").textContent = ` 🌡️온도: ${(+v2.field5||0).toFixed(1)} ℃`;
-    qsel("v2_hum").textContent  = ` 💧습도: ${Math.round(+v2.field6||0)} %`;
-    qsel("v2_time").textContent = `업데이트: ${fmtDateTime(v2.created_at)}`;
+    qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
+    qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
+    qsel("n1_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
+    qsel("n1_time").textContent = `업데이트: ${fmtDateTime(n1.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -175,4 +175,5 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
