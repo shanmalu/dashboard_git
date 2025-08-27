@@ -58,7 +58,7 @@
     <div class="value" id="v_lux">-- Lx</div>
     <div class="value" id="v_temp">-- ℃</div>
     <div class="value" id="v_hum">-- %</div>
-    <div class="time" id="v_time">업로드: --</div>
+    <div class="time" id="v_time">업데이트: --</div>
   </div>
   
   <div class="card" id="naver">
@@ -66,7 +66,7 @@
     <div class="value" id="n_lux">-- Lx</div>
     <div class="value" id="n_temp">-- ℃</div>
     <div class="value" id="n_hum">-- %</div>
-    <div class="time" id="n_time">업로드: --</div>
+    <div class="time" id="n_time">업데이트: --</div>
   </div>
  
 </div>
@@ -155,7 +155,7 @@ async function update() {
     qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n.field1||0)} Lux`;
     qsel("n_temp").textContent = ` 🌡️온도: ${(+n.field2||0).toFixed(1)} ℃`;
     qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n.field3||0)} %`;
-    qsel("n_time").textContent = `  업로드: ${fmtDateTime(n.created_at)}`;
+    qsel("n_time").textContent = `업데이트: ${fmtDateTime(n.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -175,12 +175,3 @@ setInterval(update, 15000);
   
 </body>
 </html>
-
-
-
-
-
-
-
-
-
