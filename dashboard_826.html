@@ -79,7 +79,7 @@ const CHANNELS = {
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  naver1:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
+  naver1:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
   
 function qsel(id){ return document.getElementById(id); }
@@ -128,7 +128,6 @@ async function update() {
       fetchLastFeed(CHANNELS.veranda),
       fetchLastFeed(CHANNELS.naver1),     
     ]);
-    // 수정(3) g o h v n1 naver1등 이니셜
     
     // 온실g
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
@@ -178,5 +177,3 @@ setInterval(update, 15000);
   
 </body>
 </html>
-
-
