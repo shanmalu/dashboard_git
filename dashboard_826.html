@@ -68,7 +68,7 @@
     <div class="value" id="n1_hum">-- %</div>
     <div class="time" id="n1_time">업데이트: --</div>
   </div>
- 
+  // 수정(1) 카드 
 </div>
 
 <script>
@@ -77,9 +77,10 @@ const CHANNELS = {
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  naver:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
+  naver1:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
-
+ // 수정(2) 채널 및 키키
+  
 function qsel(id){ return document.getElementById(id); }
 function pad(n) { return n.toString().padStart(2, '0'); }
 
@@ -119,14 +120,15 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v, n] = await Promise.all([
+    const [g, o, h, v, n1] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
       fetchLastFeed(CHANNELS.veranda),
-      fetchLastFeed(CHANNELS.naver),     
+      fetchLastFeed(CHANNELS.naver1),     
     ]);
-
+    // 수정(3) g o h v n1 naver1등 이니셜
+    
     // 온실g
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
@@ -151,7 +153,7 @@ async function update() {
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
-    // 베란다v2 추가822
+    // 베란다v2 추가822 
     qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
     qsel("n_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
     qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
@@ -175,3 +177,4 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
