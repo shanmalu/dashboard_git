@@ -28,6 +28,7 @@
    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
 </header>
 
+ // 수정(1) 카드 
 <div class="grid">
   <div class="card" id="greenhouse">
     <div class="title">🌿온실ch3.v826</div>
@@ -68,10 +69,11 @@
     <div class="value" id="n1_hum">-- %</div>
     <div class="time" id="n1_time">업데이트: --</div>
   </div>
-  // 수정(1) 카드 
+ 
 </div>
 
 <script>
+ // 수정(2) 채널 및 키
 const CHANNELS = {
   greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
@@ -79,7 +81,6 @@ const CHANNELS = {
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
   naver1:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
- // 수정(2) 채널 및 키키
   
 function qsel(id){ return document.getElementById(id); }
 function pad(n) { return n.toString().padStart(2, '0'); }
@@ -177,4 +178,5 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
