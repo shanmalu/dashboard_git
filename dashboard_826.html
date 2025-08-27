@@ -68,6 +68,30 @@
     <div class="value" id="n1_hum">-- %</div>
     <div class="time" id="n1_time">업데이트: --</div>
   </div>
+
+    <div class="card" id="naver2">
+    <div class="title">🏢nav.ch2.</div>
+    <div class="value" id="n2_lux">-- Lx</div>
+    <div class="value" id="n2_temp">-- ℃</div>
+    <div class="value" id="n2_hum">-- %</div>
+    <div class="time" id="n2_time">업데이트: --</div>
+  </div>
+
+    <div class="card" id="naver3">
+    <div class="title">🏢nav.ch3.</div>
+    <div class="value" id="n3_lux">-- Lx</div>
+    <div class="value" id="n3_temp">-- ℃</div>
+    <div class="value" id="n3_hum">-- %</div>
+    <div class="time" id="n3_time">업데이트: --</div>
+  </div>
+
+    <div class="card" id="naver4">
+    <div class="title">🏢nav.ch4.</div>
+    <div class="value" id="n4_lux">-- Lx</div>
+    <div class="value" id="n4_temp">-- ℃</div>
+    <div class="value" id="n4_hum">-- %</div>
+    <div class="time" id="n4_time">업데이트: --</div>
+  </div>
  
 </div>
 
@@ -77,7 +101,10 @@ const CHANNELS = {
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  naver1:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
+  naver1:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver2:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver3:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver4:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
 
 function qsel(id){ return document.getElementById(id); }
@@ -119,12 +146,15 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v, n1] = await Promise.all([
+    const [g, o, h, v, n1, n2, n3, n4] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
       fetchLastFeed(CHANNELS.veranda),
-      fetchLastFeed(CHANNELS.naver1),     
+      fetchLastFeed(CHANNELS.naver1),
+      fetchLastFeed(CHANNELS.naver2),     
+      fetchLastFeed(CHANNELS.naver3),     
+      fetchLastFeed(CHANNELS.naver4),     
     ]);
 
     // 온실g
@@ -151,12 +181,30 @@ async function update() {
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
-    // 베란다v2 추가822
+    // 네이버1
     qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
     qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
     qsel("n1_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
     qsel("n1_time").textContent = `업데이트: ${fmtDateTime(n1.created_at)}`;
-
+        
+    //네이버2
+    qsel("n2_lux").textContent  = ` 💡조명: ${Math.round(+n2.field1||0)} Lux`;
+    qsel("n2_temp").textContent = ` 🌡️온도: ${(+n2.field2||0).toFixed(1)} ℃`;
+    qsel("n2_hum").textContent  = ` 💧습도: ${Math.round(+n2.field3||0)} %`;
+    qsel("n2_time").textContent = `업데이트: ${fmtDateTime(n2.created_at)}`;
+        
+    // 네이버3
+    qsel("n3_lux").textContent  = ` 💡조명: ${Math.round(+n3.field1||0)} Lux`;
+    qsel("n3_temp").textContent = ` 🌡️온도: ${(+n3.field2||0).toFixed(1)} ℃`;
+    qsel("n3_hum").textContent  = ` 💧습도: ${Math.round(+n3.field3||0)} %`;
+    qsel("n3_time").textContent = `업데이트: ${fmtDateTime(n3.created_at)}`;
+        
+    // 네이버4
+    qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
+    qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
+    qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
+    qsel("n4_time").textContent = `업데이트: ${fmtDateTime(n4.created_at)}`;
+ 
   } catch (e) {
     console.log("업데이트 오류:", e);
   }
@@ -175,9 +223,3 @@ setInterval(update, 15000);
   
 </body>
 </html>
-
-
-
-
-
-
