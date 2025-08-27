@@ -63,10 +63,10 @@
   
   <div class="card" id="naver1">
     <div class="title">🏢nav.ch1.</div>
-    <div class="value" id="n1_lux">-- Lx</div>
-    <div class="value" id="n1_temp">-- ℃</div>
-    <div class="value" id="n1_hum">-- %</div>
-    <div class="time" id="n1_time">업데이트: --</div>
+    <div class="value" id="n_lux">-- Lx</div>
+    <div class="value" id="n_temp">-- ℃</div>
+    <div class="value" id="n_hum">-- %</div>
+    <div class="time" id="n_time">업데이트: --</div>
   </div>
  
 </div>
@@ -77,7 +77,7 @@ const CHANNELS = {
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  naver1:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
+  naver:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
 };
   
 function qsel(id){ return document.getElementById(id); }
@@ -119,7 +119,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v, n1] = await Promise.all([
+    const [g, o, h, v, n] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
@@ -152,10 +152,10 @@ async function update() {
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
     // 베란다v2 추가822 
-    qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
-    qsel("n_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
-    qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
-    qsel("n_time").textContent = `업데이트: ${fmtDateTime(n1.created_at)}`;
+    qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n.field1||0)} Lux`;
+    qsel("n_temp").textContent = ` 🌡️온도: ${(+n.field2||0).toFixed(1)} ℃`;
+    qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n.field3||0)} %`;
+    qsel("n_time").textContent = `업데이트: ${fmtDateTime(n.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -175,4 +175,5 @@ setInterval(update, 15000);
   
 </body>
 </html>
+
 
