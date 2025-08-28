@@ -146,7 +146,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g, o, h, v, n1, n2, n4, n3] = await Promise.all([
+    const [g, o, h, v, n1, n2, n3, n4] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
@@ -193,17 +193,17 @@ async function update() {
     qsel("n2_hum").textContent  = ` 💧습도: ${Math.round(+n2.field3||0)} %`;
     qsel("n2_time").textContent = `업데이트: ${fmtDateTime(n2.created_at)}`;
             
-    // 네이버4
-    qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
-    qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
-    qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
-    qsel("n4_time").textContent = `업데이트: ${fmtDateTime(n4.created_at)}`;
-        
     // 네이버3
     qsel("n3_lux").textContent  = ` 💡조명: ${Math.round(+n3.field1||0)} Lux`;
     qsel("n3_temp").textContent = ` 🌡️온도: ${(+n3.field2||0).toFixed(1)} ℃`;
     qsel("n3_hum").textContent  = ` 💧습도: ${Math.round(+n3.field3||0)} %`;
     qsel("n3_time").textContent = `업데이트: ${fmtDateTime(n3.created_at)}`;
+            
+    // 네이버4
+    qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
+    qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
+    qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
+    qsel("n4_time").textContent = `업데이트: ${fmtDateTime(n4.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
