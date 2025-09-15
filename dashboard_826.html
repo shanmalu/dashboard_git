@@ -24,7 +24,7 @@
   
 <body>
 <header>
-   <div class="header-box"><h1> 📊실시간 측정치</h1></div>
+   <div class="header-box"><h1> 📊실시간 측정치826</h1></div>
    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
 </header>
 
@@ -161,7 +161,7 @@ async function update() {
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
-    qsel("g_time").textContent = ` 826: ${fmtDateTime(g.created_at)}`;
+    qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
     
     // 사무실o
     qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
@@ -223,5 +223,6 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
 
