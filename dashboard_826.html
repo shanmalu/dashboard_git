@@ -62,7 +62,7 @@
   </div>
     
   <div class="card" id="veranda">
-    <div class="title">🏢집gma.ch1.</div>
+    <div class="title">🏢shan.ch1.집1</div>
     <div class="value" id="v_lux">-- Lx</div>
     <div class="value" id="v_temp">-- ℃</div>
     <div class="value" id="v_hum">-- %</div>
@@ -70,7 +70,7 @@
   </div>
   
   <div class="card" id="home">
-    <div class="title">🏢집gma.ch4.</div>
+    <div class="title">🏢shan.ch4.집4</div>
     <div class="value" id="h_lux">-- Lx</div>
     <div class="value" id="h_temp">-- ℃</div>
     <div class="value" id="h_hum">-- %</div>
@@ -78,7 +78,7 @@
   </div>
 
   <div class="card" id="office">
-    <div class="title">🏠사무실ch2.</div>
+    <div class="title">🏠shan.ch2.사무실2</div>
     <div class="value" id="o_lux">-- Lx</div>
     <div class="value" id="o_temp">-- ℃</div>
     <div class="value" id="o_hum">-- %</div>
@@ -86,7 +86,7 @@
     </div>
 
   <div class="card" id="greenhouse">
-    <div class="title">🌿온실ch3.v826</div>
+    <div class="title">🌿shan.ch3.난실3</div>
     <div class="value" id="g_lux">-- Lx</div>
     <div class="value" id="g_temp">-- ℃</div>
     <div class="value" id="g_hum">-- %</div>
@@ -161,7 +161,7 @@ async function update() {
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
-    qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
+    qsel("g_time").textContent = ` 826: ${fmtDateTime(g.created_at)}`;
     
     // 사무실o
     qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
@@ -223,4 +223,5 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
