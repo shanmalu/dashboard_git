@@ -185,25 +185,25 @@ async function update() {
     qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
     qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
     qsel("n1_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
-    qsel("n1_time").textContent = `업데이트: ${fmtDateTime(n1.created_at)}`;
+    qsel("n1_time").textContent = `30초간격: ${fmtDateTime(n1.created_at)}`;
         
     //네이버2
     qsel("n2_lux").textContent  = ` 💡조명: ${Math.round(+n2.field1||0)} Lux`;
     qsel("n2_temp").textContent = ` 🌡️온도: ${(+n2.field2||0).toFixed(1)} ℃`;
     qsel("n2_hum").textContent  = ` 💧습도: ${Math.round(+n2.field3||0)} %`;
-    qsel("n2_time").textContent = `업데이트: ${fmtDateTime(n2.created_at)}`;
+    qsel("n2_time").textContent = `30초간격: ${fmtDateTime(n2.created_at)}`;
             
     // 네이버3
     qsel("n3_lux").textContent  = ` 💡조명: ${Math.round(+n3.field1||0)} Lux`;
     qsel("n3_temp").textContent = ` 🌡️온도: ${(+n3.field2||0).toFixed(1)} ℃`;
     qsel("n3_hum").textContent  = ` 💧습도: ${Math.round(+n3.field3||0)} %`;
-    qsel("n3_time").textContent = `업데이트: ${fmtDateTime(n3.created_at)}`;
+    qsel("n3_time").textContent = `30초간격: ${fmtDateTime(n3.created_at)}`;
             
     // 네이버4
     qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
     qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
     qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
-    qsel("n4_time").textContent = `업데이트: ${fmtDateTime(n4.created_at)}`;
+    qsel("n4_time").textContent = ` 1분간격: ${fmtDateTime(n4.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);
@@ -223,9 +223,3 @@ setInterval(update, 10000);
   
 </body>
 </html>
-
-
-
-
-
-
