@@ -203,7 +203,7 @@ async function update() {
     qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
     qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
     qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
-    qsel("n4_time").textContent = `업데이트: ${fmtDateTime(n4.created_at)}`;
+    qsel("n4_time").textContent = `update: ${fmtDateTime(n4.created_at)}`;
 
   } catch (e) {
     console.log("업데이트 오류:", e);  }
@@ -222,6 +222,7 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
 
 
