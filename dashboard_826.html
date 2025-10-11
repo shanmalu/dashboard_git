@@ -114,7 +114,7 @@ function pad(n) { return n.toString().padStart(2, '0'); }
 function fmtDateTime(dateStr) {
   try {
     const d = new Date(dateStr);
-    const y = d.getFullYear();
+    const y = String(d.getFullYear()).slice(2); 
     const m = d.getMonth() + 1;
     const day = d.getDate();
     const h = pad(d.getHours());
@@ -128,7 +128,7 @@ function fmtDateTime(dateStr) {
 
 function fmtClockTime() {
   const d = new Date();
-  const y = d.getFullYear();
+  const y = String(d.getFullYear()).slice(2);
   const m = d.getMonth() + 1;
   const day = d.getDate();
   const h = pad(d.getHours());
@@ -223,6 +223,7 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
 
 
