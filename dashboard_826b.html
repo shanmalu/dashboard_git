@@ -2,11 +2,11 @@
 <html lang="ko">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>814.채널5개.조명온습도</title>
+<title>826b.채널8개.조명온도습도</title>
 <style>
   body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
-  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
-  .card { background:white; border-radius:14px; padding:10px; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+  .card { background:white; border-radius:14px; padding:8px; box-shadow:0 6px 12px rgba(0,0,0,.06); }
   .title { font-size:18px; margin-bottom:6px; }
   .value { font-size:18px; font-weight:700; margin-bottom:6px; }
   .label { color:#666; font-size:14px; margin-bottom:2px; }
@@ -19,56 +19,81 @@
   .header-box { width: 50%;  text-align: center;  }
   
  h1 { font-size:18px; margin:0;}
-  .clock { font-size:18px; color:#333; }
+  .clock { font-size:16px; color:#333; }
 </style>
   
 <body>
 <header>
-   <div class="header-box"><h1> 📊실시간 측정치</h1></div>
+   <div class="header-box"><h1> 📊 실시간&nbsp;측정치</h1></div>
    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
 </header>
 
-<div class="grid">
+<div class="grid">  
+      
+  <div class="card" id="naver1">
+    <div class="title">🌿na.c1.컨테너.e5i8</div>
+    <div class="value" id="n1_lux">-- Lx</div>
+    <div class="value" id="n1_temp">-- ℃</div>
+    <div class="value" id="n1_hum">-- %</div>
+    <div class="time" id="n1_time">시간: --</div>
+  </div>
+  
+  <div class="card" id="naver2">
+    <div class="title">🌿na.c2.실외기온.e6i31</div>
+    <div class="value" id="n2_lux">-- Lx</div>
+    <div class="value" id="n2_temp">-- ℃</div>
+    <div class="value" id="n2_hum">-- %</div>
+    <div class="time" id="n2_time">시간: --</div>
+  </div>
+
+   <div class="card" id="naver3)">
+    <div class="title">🌿na.c3.난실하.e7i39</div>
+    <div class="value" id="n3_lux">-- Lx</div>
+    <div class="value" id="n3_temp">-- ℃</div>
+    <div class="value" id="n3_hum">-- %</div>
+    <div class="time" id="n3_time">시간: --</div>
+  </div>
+
+  <div class="card" id="naver4">
+    <div class="title">🏢na.c4.난실상.e4i97</div>
+    <div class="value" id="n4_lux">-- Lx</div>
+    <div class="value" id="n4_temp">-- ℃</div>
+    <div class="value" id="n4_hum">-- %</div>
+    <div class="time" id="n4_time">시간: --</div>
+  </div> 
+  
   <div class="card" id="greenhouse">
-    <div class="title">🌿온실ch3.v814</div>
+    <div class="title">🌿gm.c3.난회수.e3i23</div>
     <div class="value" id="g_lux">-- Lx</div>
     <div class="value" id="g_temp">-- ℃</div>
     <div class="value" id="g_hum">-- %</div>
-    <div class="time" id="g_time">업데이트: --</div>
-    </div> 
-  
+    <div class="time" id="g_time">시간: --</div>
+  </div>       
+
   <div class="card" id="office">
-    <div class="title">🏠사무실ch2.20초</div>
+    <div class="title">🏠gm.c2.컨회수.e2i4</div>
     <div class="value" id="o_lux">-- Lx</div>
     <div class="value" id="o_temp">-- ℃</div>
     <div class="value" id="o_hum">-- %</div>
-    <div class="time" id="o_time">업데이트: --</div>
-    </div>
-
-  <div class="card" id="home">
-    <div class="title">🏢홈gma.ch4.30초</div>
-    <div class="value" id="h_lux">-- Lx</div>
-    <div class="value" id="h_temp">-- ℃</div>
-    <div class="value" id="h_hum">-- %</div>
-    <div class="time" id="h_time">업데이트: --</div>
+    <div class="time" id="o_time">시간: --</div>
   </div>
-  
+
   <div class="card" id="veranda">
-    <div class="title">🏢베란다gma.ch1.r2</div>
+    <div class="title">🏢gm.c1.김포1.e1i43</div>
     <div class="value" id="v_lux">-- Lx</div>
     <div class="value" id="v_temp">-- ℃</div>
     <div class="value" id="v_hum">-- %</div>
-    <div class="time" id="v_time">업데이트: --</div>
+    <div class="time" id="v_time">시간: --</div>
   </div>
   
-  <div class="card" id="naver">
-    <div class="title">🏢nav.ch1.</div>
-    <div class="value" id="n_lux">-- Lx</div>
-    <div class="value" id="n_temp">-- ℃</div>
-    <div class="value" id="n_hum">-- %</div>
-    <div class="time" id="n_time">업데이트: --</div>
+  <div class="card" id="home">
+    <div class="title">🏢gm.c4.김포4.0000</div>
+    <div class="value" id="h_lux">-- Lx</div>
+    <div class="value" id="h_temp">-- ℃</div>
+    <div class="value" id="h_hum">-- %</div>
+    <div class="time" id="h_time">시간: --</div>
   </div>
- 
+   
 </div>
 
 <script>
@@ -77,8 +102,11 @@ const CHANNELS = {
   office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
   veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  naver:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
-};
+  naver1:     { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver2:     { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
+  naver3:     { id: 3047588, read_key: "7JQ621N43OOEKA13" },
+  naver4:     { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
+ };
 
 function qsel(id){ return document.getElementById(id); }
 function pad(n) { return n.toString().padStart(2, '0'); }
@@ -86,28 +114,28 @@ function pad(n) { return n.toString().padStart(2, '0'); }
 function fmtDateTime(dateStr) {
   try {
     const d = new Date(dateStr);
-    const y = d.getFullYear();
+    const y = String(d.getFullYear()).slice(2); 
     const m = d.getMonth() + 1;
     const day = d.getDate();
     const h = pad(d.getHours());
     const min = pad(d.getMinutes());
     const s = pad(d.getSeconds());
-    return `${y}.${m}.${day}. ${h}:${min}:${s}`;
-  } catch (e) {
-    return dateStr;
-  }
-}
+    return `${y}.${m}.${day}. ${h}:${min}:${s}`; 
+   }
+  catch (e) {
+    return dateStr; }
+ }
 
 function fmtClockTime() {
   const d = new Date();
-  const y = d.getFullYear();
+  const y = String(d.getFullYear()).slice(2);
   const m = d.getMonth() + 1;
   const day = d.getDate();
   const h = pad(d.getHours());
   const min = pad(d.getMinutes());
   const s = pad(d.getSeconds());
   return `${y}.${m}.${day}. ${h}:${min}:${s}`;
-}
+ }
 
 async function fetchLastFeed({id, read_key}) {
   const keyParam = read_key ? `&api_key=${read_key}` : "";
@@ -115,16 +143,19 @@ async function fetchLastFeed({id, read_key}) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
-}
+ }
 
 async function update() {
   try {
-    const [g, o, h, v, n] = await Promise.all([
+    const [g, o, h, v, n1, n2, n3, n4] = await Promise.all([
       fetchLastFeed(CHANNELS.greenhouse), 
       fetchLastFeed(CHANNELS.office),
       fetchLastFeed(CHANNELS.home), 
       fetchLastFeed(CHANNELS.veranda),
-      fetchLastFeed(CHANNELS.naver),     
+      fetchLastFeed(CHANNELS.naver1),
+      fetchLastFeed(CHANNELS.naver2),     
+      fetchLastFeed(CHANNELS.naver3),     
+      fetchLastFeed(CHANNELS.naver4),     
     ]);
 
     // 온실g
@@ -151,15 +182,32 @@ async function update() {
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
-    // 베란다v2 추가822
-    qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n.field1||0)} Lux`;
-    qsel("n_temp").textContent = ` 🌡️온도: ${(+n.field2||0).toFixed(1)} ℃`;
-    qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n.field3||0)} %`;
-    qsel("n_time").textContent = `업데이트: ${fmtDateTime(n.created_at)}`;
+    // 네이버n1
+    qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
+    qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
+    qsel("n1_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
+    qsel("n1_time").textContent = ` update: ${fmtDateTime(n1.created_at)}`;
+        
+    //네이버n2
+    qsel("n2_lux").textContent  = ` 💡조명: ${Math.round(+n2.field1||0)} Lux`;
+    qsel("n2_temp").textContent = ` 🌡️온도: ${(+n2.field2||0).toFixed(1)} ℃`;
+    qsel("n2_hum").textContent  = ` 💧습도: ${Math.round(+n2.field3||0)} %`;
+    qsel("n2_time").textContent = ` update: ${fmtDateTime(n2.created_at)}`;
+            
+    // 네이버n3
+    qsel("n3_lux").textContent  = ` 💡조명: ${Math.round(+n3.field1||0)} Lux`;
+    qsel("n3_temp").textContent = ` 🌡️온도: ${(+n3.field2||0).toFixed(1)} ℃`;
+    qsel("n3_hum").textContent  = ` 💧습도: ${Math.round(+n3.field3||0)} %`;
+    qsel("n3_time").textContent = ` update: ${fmtDateTime(n3.created_at)}`;
+            
+    // 네이버n4
+    qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
+    qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
+    qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
+    qsel("n4_time").textContent = ` update: ${fmtDateTime(n4.created_at)}`;
 
   } catch (e) {
-    console.log("업데이트 오류:", e);
-  }
+    console.log("업데이트 오류:", e);  }
 }
 
 function tickClock() {
@@ -170,7 +218,7 @@ setInterval(tickClock, 1000);
 tickClock();
 
 update();
-setInterval(update, 15000);
+setInterval(update, 10000);
 </script>
   
 </body>
