@@ -2,60 +2,74 @@
 <html lang="ko">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>928b.제목1줄</title>
-  
+<title>928b.헤드2줄.time표시</title>
+
 <style>
-  body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
+  body { font-family: system-ui, sans-serif; margin:12px; background:#f7f7f9; }
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); }
-  .card { background:white; border-radius:14px; padding:8px; box-shadow:0 6px 12px rgba(0,0,0,.06); }
-  .title { font-size:16px; font-weight:700; margin-bottom:8px; }
-  .item { font-size:16px; color:#444; margin:2px 0; }
+  .card { background:white; border-radius:14px; padding:4px; box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
+  .title { font-size:16px; font-weight:700; margin-bottom:4px; }
+  .item { font-size:16px; margin:2px 0; text-align:center; } 
+  .time { font-size:14px; color:#444; margin:2px 0; }
   
- header { display:flex;  align-items: center;  margin-bottom:10px; }  
-  .header-box { width: 50%; }
-  
-  h1 { font-size:16px; margin:0;}
-  .clock { font-size:16px; color:#333; }
-  
+ header { display: flex;
+  flex-direction: column;  /* 세로 배치 */
+  align-items: center;     /*  가로 중앙 */
+  justify-content: center; /* 세로 중앙 */
+  margin-bottom: 2px; }
+ .header-box { width: auto;}
+    
+  h1 { font-size:18px; margin:0; }
+  .clock { font-size:14px; } 
+              
 </style>
-  
+
 <body>
-  
+
 <header>
-   <div class="header-box"><h1> 📊 실시간&nbsp;측정치</h1></div>
-   <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+ <div class="header-box">
+  <h1>📊 실시간 측정치</h1> 
+  <div class="clock" id="clock"> --:--:-- </div>
+ </div>
 </header>
 
 <div class="grid">
 
   <div class="card">
-    <div class="title">🌡️ 온도 (℃)</div>
+    <div class="title">🌡️ 온 도 (℃) </div>
     <div class="item" id="n3_temp">🌿 실 외 : --</div>
-    <div class="item" id="n1_temp">🏠컨테너: --</div>
-    <div class="item" id="n4_temp">🌿난실하: --</div>
-    <div class="item" id="n2_temp">🌿난실상: --</div>  
+    <div class="item" id="n1_temp">🏠 컨테너 : --</div>
+    <div class="item" id="n4_temp">🌿 온실하 : --</div>
+    <div class="item" id="n2_temp">🌿 온실상 : --</div> 
+    <div class="item" id="g3_temp">🏢 김 포 : --</div>
   </div>
 
   <div class="card">
-    <div class="title">💡 조명 (Lux)</div>
-    <div class="item" id="n3_lux">🌿 실 외 : --</div>
-    <div class="item" id="n1_lux">🏠컨테너: --</div>
-    <div class="item" id="n4_lux">🌿난실하: --</div>
-    <div class="item" id="n2_lux">🌿난실상: --</div>       
+    <div class="title">💡 조 명 (Lux) </div>
+    <div class="item" id="n3_lux">🌿 실  외 : --</div>
+    <div class="item" id="n1_lux">🏠 컨테너 : --</div>
+    <div class="item" id="n4_lux">🌿 온실하 : --</div>
+    <div class="item" id="n2_lux">🌿 온실상 : --</div> 
+    <div class="item" id="g3_lux">🏢 김 포 : --</div>
   </div>
 
   <div class="card">
-    <div class="title">💧 습도 (%)</div>
+    <div class="title">💧 습 도 (%) </div>
     <div class="item" id="n3_hum">🌿 실 외 : --</div>
-    <div class="item" id="n1_hum">🏠사무실: --</div>
-    <div class="item" id="n4_hum">난실하: --</div>
-    <div class="item" id="n2_hum">난실상: --</div>       
+    <div class="item" id="n1_hum">🏠 사무실 : --</div>
+    <div class="item" id="n4_hum">🌿온실하 : --</div>
+    <div class="item" id="n2_hum">🌿온실상 : --</div> 
+    <div class="item" id="g3_hum">🏢 김 포 : --</div>
   </div>
 
 </div>
 
 <script>
 const CHANNELS = {
+  gma1:   { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+  gma2:   { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  gma3:   { id: 3020435, read_key: "DQW527FW43D0I249" },
+  gma4:   { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
   naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
   naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
   naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
@@ -67,7 +81,7 @@ function pad(n){ return n.toString().padStart(2,"0"); }
 
 function fmtClockTime(){
   const d=new Date();
-  return `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()} ` +
+  return ` ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}.` +
          `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
@@ -78,7 +92,11 @@ async function fetchLast({id, read_key}){
 }
 
 async function update(){
-  const [n1,n2,n3,n4]=await Promise.all([
+  const [g1, g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
+    fetchLast(CHANNELS.gma1), 
+    fetchLast(CHANNELS.gma2),
+    fetchLast(CHANNELS.gma3), 
+    fetchLast(CHANNELS.gma4),   
     fetchLast(CHANNELS.naver1),
     fetchLast(CHANNELS.naver2),
     fetchLast(CHANNELS.naver3),
@@ -86,19 +104,22 @@ async function update(){
   ]);
 
   q("n3_lux").textContent  = `🌿 실 외 : ${Math.round(n3.field1)} Lux`;
-  q("n1_lux").textContent  = `🏠컨테너: ${Math.round(n1.field1)} Lux`;
-  q("n4_lux").textContent  = `🌿난실하: ${Math.round(n4.field1)} Lux`;
-  q("n2_lux").textContent  = `🌿난실상: ${Math.round(n2.field1)} Lux`;
+  q("n1_lux").textContent  = `🏠 컨테너 : ${Math.round(n1.field1)} Lux`;
+  q("n4_lux").textContent  = `🌿 온실하 : ${Math.round(n4.field1)} Lux`;
+  q("n2_lux").textContent  = `🌿 온실상 : ${Math.round(n2.field1)} Lux`;
+  q("g3_lux").textContent  = `🏢 김 포 : ${Math.round(g3.field1)} Lux`;
    
   q("n3_temp").textContent = `🌿 실 외 : ${(+n3.field2).toFixed(1)} ℃`;
-  q("n1_temp").textContent = `🏠컨테너: ${(+n1.field2).toFixed(1)} ℃`;
-  q("n4_temp").textContent = `🌿난실하: ${(+n4.field2).toFixed(1)} ℃`;
-  q("n2_temp").textContent = `🌿난실상: ${(+n2.field2).toFixed(1)} ℃`;
+  q("n1_temp").textContent = `🏠 컨테너 : ${(+n1.field2).toFixed(1)} ℃`;
+  q("n4_temp").textContent = `🌿 온실하 : ${(+n4.field2).toFixed(1)} ℃`;
+  q("n2_temp").textContent = `🌿 온실상 : ${(+n2.field2).toFixed(1)} ℃`;
+  q("g3_temp").textContent = `🏢 김 포 : ${(+g3.field2).toFixed(1)} ℃`;
   
   q("n3_hum").textContent  = `🌿 실 외 : ${Math.round(n3.field3)} %`;
-  q("n1_hum").textContent  = `🏠컨테너: ${Math.round(n1.field3)} %`;
-  q("n4_hum").textContent  = `🌿난실하: ${Math.round(n4.field3)} %`;
-  q("n2_hum").textContent  = `🌿난실상: ${Math.round(n2.field3)} %`;
+  q("n1_hum").textContent  = `🏠 컨테너 : ${Math.round(n1.field3)} %`;
+  q("n4_hum").textContent  = `🌿 온실하 : ${Math.round(n4.field3)} %`;
+  q("n2_hum").textContent  = `🌿 온실상 : ${Math.round(n2.field3)} %`;
+  q("g3_hum").textContent  = `🏢 김 포 : ${Math.round(g3.field3)} %`;
   
 }
 
@@ -109,6 +130,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
