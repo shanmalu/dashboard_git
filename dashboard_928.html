@@ -105,20 +105,20 @@ async function update(){
 
   q("n3_lux").textContent  = `🌿 실 외 : ${Math.round(n3.field1)} Lux`;
   q("n1_lux").textContent  = `🏠 컨테너 : ${Math.round(n1.field1)} Lux`;
-  q("n4_lux").textContent  = `🌿 난실하 : ${Math.round(n4.field1)} Lux`;
-  q("n2_lux").textContent  = `🌿 난실상 : ${Math.round(n2.field1)} Lux`;
+  q("n4_lux").textContent  = `🌿 온실하 : ${Math.round(n4.field1)} Lux`;
+  q("n2_lux").textContent  = `🌿 온실상 : ${Math.round(n2.field1)} Lux`;
   q("g3_lux").textContent  = `🏢 김 포 : ${Math.round(g3.field1)} Lux`;
    
   q("n3_temp").textContent = `🌿 실 외 : ${(+n3.field2).toFixed(1)} ℃`;
   q("n1_temp").textContent = `🏠 컨테너 : ${(+n1.field2).toFixed(1)} ℃`;
-  q("n4_temp").textContent = `🌿 난실하 : ${(+n4.field2).toFixed(1)} ℃`;
-  q("n2_temp").textContent = `🌿 난실상 : ${(+n2.field2).toFixed(1)} ℃`;
+  q("n4_temp").textContent = `🌿 온실하 : ${(+n4.field2).toFixed(1)} ℃`;
+  q("n2_temp").textContent = `🌿 온실상 : ${(+n2.field2).toFixed(1)} ℃`;
   q("g3_temp").textContent = `🏢 김 포 : ${(+g3.field2).toFixed(1)} ℃`;
   
   q("n3_hum").textContent  = `🌿 실 외 : ${Math.round(n3.field3)} %`;
   q("n1_hum").textContent  = `🏠 컨테너 : ${Math.round(n1.field3)} %`;
-  q("n4_hum").textContent  = `🌿 난실하 : ${Math.round(n4.field3)} %`;
-  q("n2_hum").textContent  = `🌿 난실상 : ${Math.round(n2.field3)} %`;
+  q("n4_hum").textContent  = `🌿 온실하 : ${Math.round(n4.field3)} %`;
+  q("n2_hum").textContent  = `🌿 온온실상 : ${Math.round(n2.field3)} %`;
   q("g3_hum").textContent  = `🏢 김 포 : ${Math.round(g3.field3)} %`;
   
 }
@@ -130,4 +130,5 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
