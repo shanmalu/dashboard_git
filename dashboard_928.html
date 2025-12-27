@@ -24,6 +24,15 @@
 
 <div class="grid">
 
+  <!-- 온도 -->
+  <div class="card">
+    <div class="title">🌡️ 온도 (℃)</div>
+    <div class="item" id="n3_temp"> 실 외 : --</div>
+    <div class="item" id="n1_temp">컨테너: --</div>
+    <div class="item" id="n4_temp">난실하: --</div>
+    <div class="item" id="n2_temp">난실상: --</div>  
+ </div>
+
   <!-- 조명 -->
   <div class="card">
     <div class="title">💡 조명 (Lux)</div>
@@ -33,22 +42,13 @@
     <div class="item" id="n2_lux">난실상: --</div>       
   </div>
 
-  <!-- 온도 -->
-  <div class="card">
-    <div class="title">🌡️ 온도 (℃)</div>
-    <div class="item" id="n3_temp">실 외 : --</div>
-    <div class="item" id="n1_temp">컨테너: --</div>
-    <div class="item" id="n4_temp">난실하: --</div>
-    <div class="item" id="n2_temp">난실상: --</div>  
- </div>
-
   <!-- 습도 -->
   <div class="card">
     <div class="title">💧 습도 (%)</div>
+    <div class="item" id="n3_hum"> 실 외 : --</div>
     <div class="item" id="n1_hum">사무실: --</div>
-    <div class="item" id="n2_hum">난실상: --</div>
-    <div class="item" id="n3_hum">실  외: --</div>
     <div class="item" id="n4_hum">난실하: --</div>
+    <div class="item" id="n2_hum">난실상: --</div>       
   </div>
 
 </div>
@@ -108,8 +108,4 @@ setInterval(update,10000);
 
 </body>
 </html>
-
-
-
-
 
