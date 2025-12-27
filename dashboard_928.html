@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>814.채널5개.조명온습도</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .card { background:white; border-radius:14px; padding:10px; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+  .title { font-size:18px; margin-bottom:6px; }
+  .value { font-size:18px; font-weight:700; margin-bottom:6px; }
+  .label { color:#666; font-size:14px; margin-bottom:2px; }
+  .time { font-size:14px; color:#444; margin:2px 0; }
+  
+  header { 
+    display:flex; align-items:center; 
+    justify-content:space-between;  align-items: center;
+    margin-bottom:10px; }
+  .header-box { width: 50%;  text-align: center;  }
+  
+ h1 { font-size:18px; margin:0;}
+  .clock { font-size:18px; color:#333; }
+</style>
+  
+<body>
+<header>
+   <div class="header-box"><h1> 📊실시간 측정치</h1></div>
+   <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+</header>
+
+<div class="grid">
+  <div class="card" id="greenhouse">
+    <div class="title">🌿온실ch3.v814</div>
+    <div class="value" id="g_lux">-- Lx</div>
+    <div class="value" id="g_temp">-- ℃</div>
+    <div class="value" id="g_hum">-- %</div>
+    <div class="time" id="g_time">업데이트: --</div>
+    </div> 
+  
+  <div class="card" id="office">
+    <div class="title">🏠사무실ch2.20초</div>
+    <div class="value" id="o_lux">-- Lx</div>
+    <div class="value" id="o_temp">-- ℃</div>
+    <div class="value" id="o_hum">-- %</div>
+    <div class="time" id="o_time">업데이트: --</div>
+    </div>
+
+  <div class="card" id="home">
+    <div class="title">🏢홈gma.ch4.30초</div>
+    <div class="value" id="h_lux">-- Lx</div>
+    <div class="value" id="h_temp">-- ℃</div>
+    <div class="value" id="h_hum">-- %</div>
+    <div class="time" id="h_time">업데이트: --</div>
+  </div>
+  
+  <div class="card" id="veranda">
+    <div class="title">🏢베란다gma.ch1.r2</div>
+    <div class="value" id="v_lux">-- Lx</div>
+    <div class="value" id="v_temp">-- ℃</div>
+    <div class="value" id="v_hum">-- %</div>
+    <div class="time" id="v_time">업데이트: --</div>
+  </div>
+  
+  <div class="card" id="naver">
+    <div class="title">🏢nav.ch1.</div>
+    <div class="value" id="n_lux">-- Lx</div>
+    <div class="value" id="n_temp">-- ℃</div>
+    <div class="value" id="n_hum">-- %</div>
+    <div class="time" id="n_time">업데이트: --</div>
+  </div>
+ 
+</div>
+
+<script>
+const CHANNELS = {
+  greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+  office:     { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  home:       { id: 3020435, read_key: "DQW527FW43D0I249" },
+  veranda:    { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+  naver:      { id: 3047574, read_key: "3ZULDVNI47LM2XUU" }
+};
+
+function qsel(id){ return document.getElementById(id); }
+function pad(n) { return n.toString().padStart(2, '0'); }
+
+function fmtDateTime(dateStr) {
+  try {
+    const d = new Date(dateStr);
+    const y = d.getFullYear();
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+    const h = pad(d.getHours());
+    const min = pad(d.getMinutes());
+    const s = pad(d.getSeconds());
+    return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+  } catch (e) {
+    return dateStr;
+  }
+}
+
+function fmtClockTime() {
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
+  const h = pad(d.getHours());
+  const min = pad(d.getMinutes());
+  const s = pad(d.getSeconds());
+  return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+}
+
+async function fetchLastFeed({id, read_key}) {
+  const keyParam = read_key ? `&api_key=${read_key}` : "";
+  const url = `https://api.thingspeak.com/channels/${id}/feeds/last.json?${keyParam}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function update() {
+  try {
+    const [g, o, h, v, n] = await Promise.all([
+      fetchLastFeed(CHANNELS.greenhouse), 
+      fetchLastFeed(CHANNELS.office),
+      fetchLastFeed(CHANNELS.home), 
+      fetchLastFeed(CHANNELS.veranda),
+      fetchLastFeed(CHANNELS.naver),     
+    ]);
+
+    // 온실g
+    qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
+    qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
+    qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
+    qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
+    
+    // 사무실o
+    qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
+    qsel("o_temp").textContent = ` 🌡️온도: ${(+o.field2||0).toFixed(1)} ℃`;
+    qsel("o_hum").textContent  = ` 💧습도: ${Math.round(+o.field3||0)} %`;
+    qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
+
+    // 집h
+    qsel("h_lux").textContent  = ` 💡조명: ${Math.round(+h.field1||0)} Lux`;
+    qsel("h_temp").textContent = ` 🌡️온도: ${(+h.field2||0).toFixed(1)} ℃`;
+    qsel("h_hum").textContent  = ` 💧습도: ${Math.round(+h.field3||0)} %`;
+    qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
+
+    // 베란다v
+    qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v.field1||0)} Lux`;
+    qsel("v_temp").textContent = ` 🌡️온도: ${(+v.field2||0).toFixed(1)} ℃`;
+    qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
+    qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
+    
+    // 베란다v2 추가822
+    qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n.field1||0)} Lux`;
+    qsel("n_temp").textContent = ` 🌡️온도: ${(+n.field2||0).toFixed(1)} ℃`;
+    qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n.field3||0)} %`;
+    qsel("n_time").textContent = `업데이트: ${fmtDateTime(n.created_at)}`;
+
+  } catch (e) {
+    console.log("업데이트 오류:", e);
+  }
+}
+
+function tickClock() {
+  qsel("clock").textContent = fmtClockTime();
+}
+
+setInterval(tickClock, 1000);
+tickClock();
+
+update();
+setInterval(update, 15000);
+</script>
+  
+</body>
+</html>
