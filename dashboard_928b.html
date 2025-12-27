@@ -4,27 +4,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>928b.온도습도조명시간</title>
 <style>
-  body { font-family: system-ui, sans-serif; margin:12px; background:#f7f7f9; }
-  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); }
-  .card { background:white; border-radius:14px; padding:12px; box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
-  .title { font-size:16px; font-weight:700; margin-bottom:8px; text-align:center; }
-  .item { font-size:16px; margin:2px 0; }
-
- header { display:flex;  align-items: center;
+  body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+  .card { background:white; border-radius:14px; padding:8px; box-shadow:0 6px 12px rgba(0,0,0,.06); }
+  .title { font-size:16px; margin-bottom:6px; }
+  .value { font-size:16px; font-weight:700; margin-bottom:6px; }
+  .label { color:#666; font-size:14px; margin-bottom:2px; }
+  .time { font-size:14px; color:#444; margin:2px 0; }
+  
+  header { display:flex;  align-items: center;
     margin-bottom:10px; }
-  .header-box { width: 50%;  text-align: center;  }  
-    
- h1 { font-size:16px; margin:0; }
-  .clock { font-size:16px; } 
-              
+  .header-box { width: 50%;  text-align: center;  }
+  
+ h1 { font-size:16px; margin:0;}
+  .clock { font-size:16px; color:#333; }
 </style>
-
+  
 <body>
-
 <header>
- <div class="header-box">
-  <h1>📊 실시간 측정치</h1> <div class="clock" id="clock">--:--:-- </div>  
- </div>
+   <div class="header-box"><h1> 📊 실시간&nbsp;측정치</h1></div>
+   <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
 </header>
 
 <div class="grid">
@@ -110,6 +109,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
