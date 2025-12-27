@@ -11,20 +11,26 @@
   .title { font-size:18px; font-weight:700; margin-bottom:8px; text-align:center; }
   .item { font-size:16px; margin:2px 0; }
   
-  header { display:flex; align-items: center;
-    justify-content:space-between; align-items: center;
-    margin-bottom:10px; }
-  .header-box { text-align: center;  }
-  
+header { display: flex;
+  flex-direction: column;   /* 세로 배치 */
+  align-items: center;      /* 가로 중앙 */
+  justify-content: center;  /* 세로 중앙 */
+  margin-bottom: 10px; }
+
+ .header-box { width: auto;  text-align: center;
+    
   h1 { font-size:18px; margin:0; }
-  .clock { font-size:16px; }
+  .clock { font-size:16px; } 
+              
 </style>
 
 <body>
 
 <header>
+ <div class="header-box">
   <h1> 📊 실시간 측정치</h1> 
   <div class="clock" id="clock">--:--:-- </div>
+ </div>
 </header>
 
 <div class="grid">
@@ -113,6 +119,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
