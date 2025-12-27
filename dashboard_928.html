@@ -61,47 +61,11 @@
     <div class="value" id="n4_hum">-- %</div>
     <div class="time" id="n4_time">시간: --</div>
   </div> 
-  
-  <div class="card" id="gma3">
-    <div class="title">🌿gm.c3.난회수.e3i23</div>
-    <div class="value" id="g3_lux">-- Lx</div>
-    <div class="value" id="g3_temp">-- ℃</div>
-    <div class="value" id="g3_hum">-- %</div>
-    <div class="time" id="g3_time">시간: --</div>
-  </div>       
-
-  <div class="card" id="gma2">
-    <div class="title">🏠gm.c2.컨회수.e2i4</div>
-    <div class="value" id="g2_lux">-- Lx</div>
-    <div class="value" id="g2_temp">-- ℃</div>
-    <div class="value" id="g2_hum">-- %</div>
-    <div class="time" id="g2_time">시간: --</div>
-  </div>
-
-  <div class="card" id="gma1">
-    <div class="title">🏢gm.c1.김포1.e1i43</div>
-    <div class="value" id="g1_lux">-- Lx</div>
-    <div class="value" id="g1_temp">-- ℃</div>
-    <div class="value" id="g1_hum">-- %</div>
-    <div class="time" id="g1_time">시간: --</div>
-  </div>
-  
-  <div class="card" id="gma4">
-    <div class="title">🏢gm.c4.김포4.0000</div>
-    <div class="value" id="g4_lux">-- Lx</div>
-    <div class="value" id="g4_temp">-- ℃</div>
-    <div class="value" id="g4_hum">-- %</div>
-    <div class="time" id="g4_time">시간: --</div>
-  </div>
-   
+    
 </div>
 
 <script>
 const CHANNELS = {
-  gma1:   { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
-  gma2:   { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
-  gma3:   { id: 3020435, read_key: "DQW527FW43D0I249" },
-  gma4:   { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
   naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
   naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
   naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
@@ -147,41 +111,13 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g1, g2, g3, g4, n1, n2, n3, n4] = await Promise.all([
-      fetchLastFeed(CHANNELS.gma1), 
-      fetchLastFeed(CHANNELS.gma2),
-      fetchLastFeed(CHANNELS.gma3), 
-      fetchLastFeed(CHANNELS.gma4),
+    const [n1, n2, n3, n4] = await Promise.all([
       fetchLastFeed(CHANNELS.naver1),
       fetchLastFeed(CHANNELS.naver2),     
       fetchLastFeed(CHANNELS.naver3),     
       fetchLastFeed(CHANNELS.naver4),     
     ]);
-
-    // 온실g1
-    qsel("g1_lux").textContent  = ` 💡조명: ${Math.round(+g1.field1||0)} Lux`;
-    qsel("g1_temp").textContent = ` 🌡️온도: ${(+g1.field2||0).toFixed(1)} ℃`;
-    qsel("g1_hum").textContent  = ` 💧습도: ${Math.round(+g1.field3||0)} %`;
-    qsel("g1_time").textContent = `업데이트: ${fmtDateTime(g1.created_at)}`;
-    
-    // 사무실g2
-    qsel("g2_lux").textContent  = ` 💡조명: ${Math.round(+g2.field1||0)} Lux`;
-    qsel("g2_temp").textContent = ` 🌡️온도: ${(+g2.field2||0).toFixed(1)} ℃`;
-    qsel("g2_hum").textContent  = ` 💧습도: ${Math.round(+g2.field3||0)} %`;
-    qsel("g2_time").textContent = `업데이트: ${fmtDateTime(g2.created_at)}`; 
-
-    // 집g3
-    qsel("g3_lux").textContent  = ` 💡조명: ${Math.round(+g3.field1||0)} Lux`;
-    qsel("g3_temp").textContent = ` 🌡️온도: ${(+g3.field2||0).toFixed(1)} ℃`;
-    qsel("g3_hum").textContent  = ` 💧습도: ${Math.round(+g3.field3||0)} %`;
-    qsel("g3_time").textContent = `업데이트: ${fmtDateTime(g3.created_at)}`;
-
-    // 베란다g4
-    qsel("g4_lux").textContent  = ` 💡조명: ${Math.round(+g4.field1||0)} Lux`;
-    qsel("g4_temp").textContent = ` 🌡️온도: ${(+g4.field2||0).toFixed(1)} ℃`;
-    qsel("g4_hum").textContent  = ` 💧습도: ${Math.round(+g4.field3||0)} %`;
-    qsel("g4_time").textContent = `업데이트: ${fmtDateTime(g4.created_at)}`;
-    
+  
     // 네이버n1
     qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
     qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
@@ -223,8 +159,4 @@ setInterval(update, 10000);
   
 </body>
 </html>
-
-
-
-
 
