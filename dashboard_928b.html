@@ -145,11 +145,11 @@ async function update(){
   q("n2_hum").textContent  = `🌿 온실상 : ${Math.round(n2.field3)} %`;
   q("g3_hum").textContent  = `🏢 김 포1 : ${Math.round(g1.field3)} %`;
     
-  q("n3_uptime").textContent  = `🌿실 외 :${fmtDateTime(n3.created_at)}`;
+  q("n3_uptime").textContent  = `🌿실 외:${fmtDateTime(n3.created_at)}`;
   q("n1_uptime").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
   q("n4_uptime").textContent  = `🌿온실하:${fmtDateTime(n4.created_at)}`;
   q("n2_uptime").textContent  = `🌿온실상:${fmtDateTime(n2.created_at)}`;
-  q("g3_uptime").textContent  = `🏢김 포1 :${fmtDateTime(g1.created_at)}`;
+  q("g3_uptime").textContent  = `🏢김 포1:${fmtDateTime(g1.created_at)}`;
   
 }
 
@@ -160,5 +160,6 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
