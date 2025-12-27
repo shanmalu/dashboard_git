@@ -9,23 +9,18 @@
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); }
   .card { background:white; border-radius:14px; padding:12px; box-shadow:0 6px 12px rgba(0,0,0,.06); }
   .title { font-size:16px; font-weight:700; margin-bottom:8px; }
-  .time { font-size:16px; color:#444; margin:2px 0; }
+  .item { font-size:16px; color:#444; margin:2px 0; }
   
-  .value { font-size:14px; font-weight:700; margin-bottom:6px; }
-  .label { color:#666; font-size:12px; margin-bottom:2px; }
-
-  
-  header { display:flex;  align-items: center;
-    margin-bottom:10px; }
-  
+  header { display:flex;  align-items: center;  margin-bottom:10px; }  
   .header-box { width: 50%;  text-align: center;  }
   
- h1 { font-size:16px; margin:0;}
+  h1 { font-size:16px; margin:0;}
   .clock { font-size:16px; color:#333; }
   
 </style>
   
 <body>
+  
 <header>
    <div class="header-box"><h1> 📊 실시간&nbsp;측정치</h1></div>
    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
@@ -114,6 +109,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
