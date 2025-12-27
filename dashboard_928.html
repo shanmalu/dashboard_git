@@ -91,7 +91,7 @@ async function update(){
   q("n3_temp").textContent = ` 🌿실 외 : ${(+n3.field2).toFixed(1)} ℃`;
   q("n1_temp").textContent = `🏠컨테너: ${(+n1.field2).toFixed(1)} ℃`;
   q("n4_temp").textContent = `🌿난실하: ${(+n4.field2).toFixed(1)} ℃`;
-  q("n2_temp").textContent = `난실상: ${(+n2.field2).toFixed(1)} ℃`;
+  q("n2_temp").textContent = `🌿난실상: ${(+n2.field2).toFixed(1)} ℃`;
   
   q("n3_hum").textContent  = ` 🌿실 외 : ${Math.round(n3.field3)} %`;
   q("n1_hum").textContent  = `🏠컨테너: ${Math.round(n1.field3)} %`;
@@ -107,6 +107,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
