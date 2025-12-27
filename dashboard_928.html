@@ -74,7 +74,7 @@ function pad(n){ return n.toString().padStart(2,"0"); }
 
 function fmtClockTime(){
   const d=new Date();
-  return `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()} ` +
+  return `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}. ` +
          `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
@@ -116,6 +116,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
