@@ -136,30 +136,35 @@ async function update() {
     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_temp").textContent = ` 🌡️온도: ${(+g.field2||0).toFixed(1)} ℃`;
     qsel("g_hum").textContent  = ` 💧습도: ${Math.round(+g.field3||0)} %`;
+     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("g_time").textContent = `업데이트: ${fmtDateTime(g.created_at)}`;
     
     // 사무실o
     qsel("o_lux").textContent  = ` 💡조명: ${Math.round(+o.field1||0)} Lux`;
     qsel("o_temp").textContent = ` 🌡️온도: ${(+o.field2||0).toFixed(1)} ℃`;
     qsel("o_hum").textContent  = ` 💧습도: ${Math.round(+o.field3||0)} %`;
+     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("o_time").textContent = `업데이트: ${fmtDateTime(o.created_at)}`; 
 
     // 집h
     qsel("h_lux").textContent  = ` 💡조명: ${Math.round(+h.field1||0)} Lux`;
     qsel("h_temp").textContent = ` 🌡️온도: ${(+h.field2||0).toFixed(1)} ℃`;
     qsel("h_hum").textContent  = ` 💧습도: ${Math.round(+h.field3||0)} %`;
+     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("h_time").textContent = `업데이트: ${fmtDateTime(h.created_at)}`;
 
     // 베란다v
     qsel("v_lux").textContent  = ` 💡조명: ${Math.round(+v.field1||0)} Lux`;
     qsel("v_temp").textContent = ` 🌡️온도: ${(+v.field2||0).toFixed(1)} ℃`;
     qsel("v_hum").textContent  = ` 💧습도: ${Math.round(+v.field3||0)} %`;
+     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("v_time").textContent = `업데이트: ${fmtDateTime(v.created_at)}`;
     
     // 베란다v2 추가822
     qsel("n_lux").textContent  = ` 💡조명: ${Math.round(+n.field1||0)} Lux`;
     qsel("n_temp").textContent = ` 🌡️온도: ${(+n.field2||0).toFixed(1)} ℃`;
     qsel("n_hum").textContent  = ` 💧습도: ${Math.round(+n.field3||0)} %`;
+     qsel("g_lux").textContent  = ` 💡조명: ${Math.round(+g.field1||0)} Lux`;
     qsel("n_time").textContent = `업데이트: ${fmtDateTime(n.created_at)}`;
 
   } catch (e) {
@@ -180,6 +185,7 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
 
 
