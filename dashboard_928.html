@@ -158,25 +158,25 @@ async function update() {
       fetchLastFeed(CHANNELS.naver4),     
     ]);
 
-    // 온실g
+    // 온실g1
     qsel("g1_lux").textContent  = ` 💡조명: ${Math.round(+g1.field1||0)} Lux`;
     qsel("g1_temp").textContent = ` 🌡️온도: ${(+g1.field2||0).toFixed(1)} ℃`;
     qsel("g1_hum").textContent  = ` 💧습도: ${Math.round(+g1.field3||0)} %`;
     qsel("g1_time").textContent = `업데이트: ${fmtDateTime(g1.created_at)}`;
     
-    // 사무실o
+    // 사무실g2
     qsel("g2_lux").textContent  = ` 💡조명: ${Math.round(+g2.field1||0)} Lux`;
     qsel("g2_temp").textContent = ` 🌡️온도: ${(+g2.field2||0).toFixed(1)} ℃`;
     qsel("g2_hum").textContent  = ` 💧습도: ${Math.round(+g2.field3||0)} %`;
     qsel("g2_time").textContent = `업데이트: ${fmtDateTime(g2.created_at)}`; 
 
-    // 집h
+    // 집g3
     qsel("g3_lux").textContent  = ` 💡조명: ${Math.round(+g3.field1||0)} Lux`;
     qsel("g3_temp").textContent = ` 🌡️온도: ${(+g3.field2||0).toFixed(1)} ℃`;
     qsel("g3_hum").textContent  = ` 💧습도: ${Math.round(+g3.field3||0)} %`;
     qsel("g3_time").textContent = `업데이트: ${fmtDateTime(g3.created_at)}`;
 
-    // 베란다v
+    // 베란다g4
     qsel("g4_lux").textContent  = ` 💡조명: ${Math.round(+g4.field1||0)} Lux`;
     qsel("g4_temp").textContent = ` 🌡️온도: ${(+g4.field2||0).toFixed(1)} ℃`;
     qsel("g4_hum").textContent  = ` 💧습도: ${Math.round(+g4.field3||0)} %`;
@@ -223,6 +223,7 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
 
 
