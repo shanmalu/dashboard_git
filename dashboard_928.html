@@ -93,10 +93,10 @@ async function fetchLast({id, read_key}){
 
 async function update(){
   const [g1, g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
-    fetchLastFeed(CHANNELS.gma1), 
-    fetchLastFeed(CHANNELS.gma2),
-    fetchLastFeed(CHANNELS.gma3), 
-    fetchLastFeed(CHANNELS.gma4),   
+    fetchLast(CHANNELS.gma1), 
+    fetchLast(CHANNELS.gma2),
+    fetchLast(CHANNELS.gma3), 
+    fetchLast(CHANNELS.gma4),   
     fetchLast(CHANNELS.naver1),
     fetchLast(CHANNELS.naver2),
     fetchLast(CHANNELS.naver3),
@@ -130,4 +130,5 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
