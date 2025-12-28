@@ -9,7 +9,9 @@
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); }
   .card { background:white; border-radius:14px; padding:4px; box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
   .title { font-size:16px; font-weight:700; margin-bottom:4px; }
-  .item { font-size:16px; margin:2px; text-align:center; }
+  .item { font-size:16px; margin:2px; text-align:center; } 
+  .label { color:#666; font-size:14px; margin-bottom:20px; 
+           text-align:center;}
   
 header { display: flex;
   flex-direction: column;  /* 세로 배치 */
@@ -25,7 +27,8 @@ header { display: flex;
 </style>
 
 <body>
-
+<div class="label"> File: dashboard_827.  </div>
+  
 <header>
  <div class="header-box">
   <h1>📊 실시간 측정치</h1> 
@@ -63,6 +66,8 @@ header { display: flex;
   </div>
 
 </div>
+<div class="label"> File: dashboard_827.  </div>
+<div class="label"> File: dashboard_827.  </div>
 
 <script>
 const CHANNELS = {
@@ -130,10 +135,3 @@ setInterval(update,10000);
 
 </body>
 </html>
-
-
-
-
-
-
-
