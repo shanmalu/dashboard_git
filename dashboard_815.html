@@ -64,34 +64,34 @@
   
   <div class="card" id="gma3">
     <div class="title">🌿gm.c3.난회수.e3i23</div>
-    <div class="value" id="g3_lux">-- Lx</div>
-    <div class="value" id="g3_temp">-- ℃</div>
-    <div class="value" id="g3_hum">-- %</div>
-    <div class="time" id="g3_time">시간: --</div>
+    <div class="value" id="g3h_lux">-- Lx</div>
+    <div class="value" id="g3h_temp">-- ℃</div>
+    <div class="value" id="g3h_hum">-- %</div>
+    <div class="time" id="g3h_time">시간: --</div>
   </div>       
 
   <div class="card" id="gma2">
     <div class="title">🏠gm.c2.컨회수.e2i4</div>
-    <div class="value" id="g2_lux">-- Lx</div>
-    <div class="value" id="g2_temp">-- ℃</div>
-    <div class="value" id="g2_hum">-- %</div>
-    <div class="time" id="g2_time">시간: --</div>
+    <div class="value" id="g2o_lux">-- Lx</div>
+    <div class="value" id="g2o_temp">-- ℃</div>
+    <div class="value" id="g2o_hum">-- %</div>
+    <div class="time" id="g2o_time">시간: --</div>
   </div>
 
   <div class="card" id="gma1">
     <div class="title">🏢gm.c1.김포1.e1i43</div>
-    <div class="value" id="g1_lux">-- Lx</div>
-    <div class="value" id="g1_temp">-- ℃</div>
-    <div class="value" id="g1_hum">-- %</div>
-    <div class="time" id="g1_time">시간: --</div>
+    <div class="value" id="g1g_lux">-- Lx</div>
+    <div class="value" id="g1g_temp">-- ℃</div>
+    <div class="value" id="g1g_hum">-- %</div>
+    <div class="time" id="g1g_time">시간: --</div>
   </div>
   
   <div class="card" id="gma4">
     <div class="title">🏢gm.c4.김포4.0000</div>
-    <div class="value" id="g4_lux">-- Lx</div>
-    <div class="value" id="g4_temp">-- ℃</div>
-    <div class="value" id="g4_hum">-- %</div>
-    <div class="time" id="g4_time">시간: --</div>
+    <div class="value" id="g4v_lux">-- Lx</div>
+    <div class="value" id="g4v_temp">-- ℃</div>
+    <div class="value" id="g4v_hum">-- %</div>
+    <div class="time" id="g4v_time">시간: --</div>
   </div>
    
 </div> 
@@ -148,7 +148,7 @@ async function fetchLastFeed({id, read_key}) {
 
 async function update() {
   try {
-    const [g1, g2, g3, g4, n1, n2, n3, n4] = await Promise.all([
+    const [g1g, g2o, g3h, g4v, n1, n2, n3, n4] = await Promise.all([
       fetchLastFeed(CHANNELS.gma1), 
       fetchLastFeed(CHANNELS.gma2),
       fetchLastFeed(CHANNELS.gma3), 
@@ -160,28 +160,28 @@ async function update() {
     ]);
 
     // 온실g1
-    qsel("g1_lux").textContent  = ` 💡조명: ${Math.round(+g1.field1||0)} Lux`;
-    qsel("g1_temp").textContent = ` 🌡️온도: ${(+g1.field2||0).toFixed(1)} ℃`;
-    qsel("g1_hum").textContent  = ` 💧습도: ${Math.round(+g1.field3||0)} %`;
-    qsel("g1_time").textContent = `업데이트: ${fmtDateTime(g1.created_at)}`;
+    qsel("g1g_lux").textContent  = ` 💡조명: ${Math.round(+g1g.field1||0)} Lux`;
+    qsel("g1g_temp").textContent = ` 🌡️온도: ${(+g1g.field2||0).toFixed(1)} ℃`;
+    qsel("g1g_hum").textContent  = ` 💧습도: ${Math.round(+g1g.field3||0)} %`;
+    qsel("g1g_time").textContent = `업데이트: ${fmtDateTime(g1g.created_at)}`;
     
     // 사무실g2
-    qsel("g2_lux").textContent  = ` 💡조명: ${Math.round(+g2.field1||0)} Lux`;
-    qsel("g2_temp").textContent = ` 🌡️온도: ${(+g2.field2||0).toFixed(1)} ℃`;
-    qsel("g2_hum").textContent  = ` 💧습도: ${Math.round(+g2.field3||0)} %`;
-    qsel("g2_time").textContent = `업데이트: ${fmtDateTime(g2.created_at)}`; 
+    qsel("g2o_lux").textContent  = ` 💡조명: ${Math.round(+g2o.field1||0)} Lux`;
+    qsel("g2o_temp").textContent = ` 🌡️온도: ${(+g2o.field2||0).toFixed(1)} ℃`;
+    qsel("g2o_hum").textContent  = ` 💧습도: ${Math.round(+g2o.field3||0)} %`;
+    qsel("g2o_time").textContent = `업데이트: ${fmtDateTime(g2o.created_at)}`; 
 
     // 집g3
-    qsel("g3_lux").textContent  = ` 💡조명: ${Math.round(+g3.field1||0)} Lux`;
-    qsel("g3_temp").textContent = ` 🌡️온도: ${(+g3.field2||0).toFixed(1)} ℃`;
-    qsel("g3_hum").textContent  = ` 💧습도: ${Math.round(+g3.field3||0)} %`;
-    qsel("g3_time").textContent = `업데이트: ${fmtDateTime(g3.created_at)}`;
+    qsel("g3h_lux").textContent  = ` 💡조명: ${Math.round(+g3h.field1||0)} Lux`;
+    qsel("g3h_temp").textContent = ` 🌡️온도: ${(+g3h.field2||0).toFixed(1)} ℃`;
+    qsel("g3h_hum").textContent  = ` 💧습도: ${Math.round(+g3h.field3||0)} %`;
+    qsel("g3h_time").textContent = `업데이트: ${fmtDateTime(g3h.created_at)}`;
 
     // 베란다g4
-    qsel("g4_lux").textContent  = ` 💡조명: ${Math.round(+g4.field1||0)} Lux`;
-    qsel("g4_temp").textContent = ` 🌡️온도: ${(+g4.field2||0).toFixed(1)} ℃`;
-    qsel("g4_hum").textContent  = ` 💧습도: ${Math.round(+g4.field3||0)} %`;
-    qsel("g4_time").textContent = `업데이트: ${fmtDateTime(g4.created_at)}`;
+    qsel("g4v_lux").textContent  = ` 💡조명: ${Math.round(+g4v.field1||0)} Lux`;
+    qsel("g4v_temp").textContent = ` 🌡️온도: ${(+g4v.field2||0).toFixed(1)} ℃`;
+    qsel("g4v_hum").textContent  = ` 💧습도: ${Math.round(+g4v.field3||0)} %`;
+    qsel("g4v_time").textContent = `업데이트: ${fmtDateTime(g4v.created_at)}`;
     
     // 네이버n1
     qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
@@ -224,4 +224,5 @@ setInterval(update, 10000);
   
 </body>
 </html>
+
 
