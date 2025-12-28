@@ -44,7 +44,7 @@
     <div class="item" id="n1_temp">🏠 컨테너 : --</div>
     <div class="item" id="n4_temp">🌿 온실하 : --</div>
     <div class="item" id="n2_temp">🌿 온실상 : --</div> 
-    <div class="item" id="g1_temp">🏢 김 포1 : --</div>
+    <div class="item" id="g1_temp">🏢 김 포3 : --</div>
   </div>
 
   <div class="card">
@@ -53,7 +53,7 @@
     <div class="item" id="n1_lux">🏠 컨테너 : --</div>
     <div class="item" id="n4_lux">🌿 온실하 : --</div>
     <div class="item" id="n2_lux">🌿 온실상 : --</div> 
-    <div class="item" id="g1_lux">🏢 김 포1 : --</div>
+    <div class="item" id="g1_lux">🏢 김 포3 : --</div>
   </div>
 
   <div class="card">
@@ -62,7 +62,7 @@
     <div class="item" id="n1_hum">🏠 사무실 : --</div>
     <div class="item" id="n4_hum">🌿 온실하 : --</div>
     <div class="item" id="n2_hum">🌿 온실상 : --</div> 
-    <div class="item" id="g1_hum">🏢 김 포1 : --</div>
+    <div class="item" id="g1_hum">🏢 김 포3 : --</div>
   </div>
 
     <div class="card">
@@ -71,7 +71,7 @@
     <div class="item" id="n1_uptime">🏠사무실:--</div>
     <div class="item" id="n4_uptime">🌿온실하:--</div>
     <div class="item" id="n2_uptime">🌿온실상:--</div> 
-    <div class="item" id="g1_uptime">🏢김 포1:--</div>
+    <div class="item" id="g1_uptime">🏢김 포3:--</div>
   </div>
 
 </div>
@@ -136,25 +136,25 @@ async function update(){
   q("n1_lux").textContent  = `🏠 컨테너 : ${Math.round(n1.field1)} Lux`;
   q("n4_lux").textContent  = `🌿 온실하 : ${Math.round(n4.field1)} Lux`;
   q("n2_lux").textContent  = `🌿 온실상 : ${Math.round(n2.field1)} Lux`;
-  q("g3_lux").textContent  = `🏢 김 포1 : ${Math.round(g3.field1)} Lux`;
+  q("g3_lux").textContent  = `🏢 김 포3 : ${Math.round(g3.field1)} Lux`;
    
   q("n3_temp").textContent = `🌿 실 외1 : ${(+n3.field2).toFixed(1)} ℃`;
   q("n1_temp").textContent = `🏠 컨테너 : ${(+n1.field2).toFixed(1)} ℃`;
   q("n4_temp").textContent = `🌿 온실하 : ${(+n4.field2).toFixed(1)} ℃`;
   q("n2_temp").textContent = `🌿 온실상 : ${(+n2.field2).toFixed(1)} ℃`;
-  q("g3_temp").textContent = `🏢 김 포1 : ${(+g3.field2).toFixed(1)} ℃`;
+  q("g3_temp").textContent = `🏢 김 포3 : ${(+g3.field2).toFixed(1)} ℃`;
   
   q("n3_hum").textContent  = `🌿 실 외1 : ${Math.round(n3.field3)} %`;
   q("n1_hum").textContent  = `🏠 컨테너 : ${Math.round(n1.field3)} %`;
   q("n4_hum").textContent  = `🌿 온실하 : ${Math.round(n4.field3)} %`;
   q("n2_hum").textContent  = `🌿 온실상 : ${Math.round(n2.field3)} %`;
-  q("g3_hum").textContent  = `🏢 김 포1 : ${Math.round(g3.field3)} %`;
+  q("g3_hum").textContent  = `🏢 김 포3 : ${Math.round(g3.field3)} %`;
     
   q("n3_uptime").textContent  = `🌿실 외1:${fmtDateTime(n3.created_at)}`;
   q("n1_uptime").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
   q("n4_uptime").textContent  = `🌿온실하:${fmtDateTime(n4.created_at)}`;
   q("n2_uptime").textContent  = `🌿온실상:${fmtDateTime(n2.created_at)}`;
-  q("g3_uptime").textContent  = `🏢김 포1:${fmtDateTime(g3.created_at)}`;
+  q("g3_uptime").textContent  = `🏢김 포3:${fmtDateTime(g3.created_at)}`;
   
 }
 
