@@ -16,6 +16,7 @@
            text-align:center;}
      
  header { display: flex;
+  flex-direction: column;  /* 세로 배치 */         
   align-items: center;     /*  가로 중앙 */
   justify-content: center; /* 세로 중앙 */
   margin-bottom: 2px; }
@@ -33,7 +34,6 @@
   <h1>📊 실시간 측정치</h1> 
   <div class="clock" id="clock"> --:--:-- </div>
  </div>
-
 </header> 
 
 <div class="grid">
@@ -164,6 +164,7 @@ setInterval(update,10000);
 
 </body>
 </html>
+
 
 
 
