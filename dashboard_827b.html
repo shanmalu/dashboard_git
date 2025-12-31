@@ -95,7 +95,13 @@ const CHANNELS = {
   naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
   naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
 };
-  
+
+function tickClock(){
+  const time = fmtClockTime();
+  document.querySelectorAll(".clock")
+    .forEach(el => el.textContent = time);
+}
+    
 function q(id){ return document.getElementById(id); }
 function pad(n){ return n.toString().padStart(2,"0"); }
 
@@ -164,12 +170,6 @@ async function update(){
   
 }
 
-function tickClock(){
-  const time = fmtClockTime();
-  document.querySelectorAll(".clock")
-    .forEach(el => el.textContent = time);
-}
-  
 setInterval(tickClock, 1000);
 tickClock();
   
@@ -177,8 +177,4 @@ tickClock();
 
 </body>
 </html>
-
-
-
-
 
