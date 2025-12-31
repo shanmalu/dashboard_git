@@ -96,8 +96,12 @@ const CHANNELS = {
   naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
 };
 
+function tickClock() {
+  const time = fmtClockTime();
+  document.querySelectorAll(".clock")
+    .forEach(el => el.textContent = time);
 }
-    
+  
 function q(id){ return document.getElementById(id); }
 function pad(n){ return n.toString().padStart(2,"0"); }
 
@@ -166,10 +170,13 @@ async function update(){
   
 }
 
-
+setInterval(tickClock, 1000);
+tickClock();
+  
 </script>
 
 </body>
 </html>
+
 
 
