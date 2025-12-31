@@ -75,14 +75,14 @@
     <div class="item" id="n2_uptime">🌿온실상:--</div> 
     <div class="item" id="g3_uptime">🏢김 포3:--</div>
   </div>
+
 </div> 
+<div class="label"> dashboard_827b.  </div> 
 
-
-<div class="header-box">
-  <h1>📊 실시간 측정치</h1> 
-  <div class="clock" id="clock"> --:--:-- </div>
- </div>
-<div class="label"> dashboard_827b.  </div>   
+<header class="page-header">
+  <div class="header-box">
+    <h1>📊 실시간 측정치</h1>
+    <div class="clock">--:--:--</div>   </div> </header>
   
 <script>
 const CHANNELS = {
@@ -96,12 +96,6 @@ const CHANNELS = {
   naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
 };
 
-function tickClock() {
-  const time = fmtClockTime();
-  document.querySelectorAll(".clock")
-    .forEach(el => el.textContent = time);
-}
-  
 function q(id){ return document.getElementById(id); }
 function pad(n){ return n.toString().padStart(2,"0"); }
 
@@ -169,14 +163,12 @@ async function update(){
   q("g3_uptime").textContent  = `🏢김 포3:${fmtDateTime(g3.created_at)}`;
   
 }
-
-setInterval(tickClock, 1000);
-tickClock();
   
+setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
+update();
+setInterval(update,10000);
 </script>
 
 </body>
 </html>
-
-
 
