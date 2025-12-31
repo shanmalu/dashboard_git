@@ -167,8 +167,20 @@ async function update(){
 setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
 update();
 setInterval(update,10000);
+
+function tickClock(){
+  const time = fmtClockTime();
+  document.querySelectorAll(".clock")
+    .forEach(el => el.textContent = time);
+}
+
+setInterval(tickClock, 1000);
+tickClock();
+
+  
 </script>
 
 </body>
 </html>
+
 
