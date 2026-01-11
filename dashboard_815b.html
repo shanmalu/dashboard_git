@@ -220,17 +220,19 @@ async function update() {
     qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
     qsel("n4_time").textContent = ` update: ${fmtDateTime(n4.created_at)}`;
 
-  } catch (e) {
-    console.log("업데이트 오류:", e);  }
-}
+  } 
+  catch (e) {
+    console.log("업데이트 오류:", e);  } 
+
+setInterval(()=>qsel("clock").textContent=fmtClockTime(),1000);
+update();
+setInterval(update,10000);  
 
 function tickClock() {
-  qsel("clock").textContent = fmtClockTime() ,1000;
+  const time = fmtClockTime();
+  document.querySelectorAll(".clock")
+ .forEach(el => el.textContent = time);
 }
-
-update();
-setInterval(update, 10000);
-
   
 setInterval(tickClock, 1000);
 tickClock();
