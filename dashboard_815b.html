@@ -224,7 +224,7 @@ async function update() {
   catch (e) {
     console.log("업데이트 오류:", e);  } 
 
-setInterval(()=>qsel("clock").textContent=fmtClockTime(),1000);
+setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
 update();
 setInterval(update,10000);  
 
