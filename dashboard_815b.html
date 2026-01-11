@@ -223,20 +223,17 @@ async function update() {
   } 
   catch (e) {
     console.log("업데이트 오류:", e);  } 
-
-setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
-update();
-setInterval(update,10000);  
+}
 
 function tickClock() {
-  const time = fmtClockTime();
-  document.querySelectorAll(".clock")
- .forEach(el => el.textContent = time);
+  qsel("clock").textContent = fmtClockTime();
 }
-  
+
 setInterval(tickClock, 1000);
 tickClock();
-  
+
+update();
+setInterval(update, 10000);
 </script>
   
 </body>
