@@ -12,7 +12,7 @@
           box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
   .title { font-size:17px; font-weight:700; margin-bottom:4px; }
   .item  { font-size:16px; font-weight:600; margin:4px; text-align:center; } 
-  .uptime { font-size: 14px; color:#444; margin:2px 0; }
+  .timeupload { font-size: 14px; color:#444; margin:2px 0; }
   .label { color:#666; font-size:14px; margin-bottom:10px; 
            text-align:center;}
      
@@ -68,12 +68,12 @@
   </div>
 
     <div class="card">
-    <div class="title">⏰🔄uptime.827b </div>
-    <div class="item" id="n3_uptime">🌿실 외1:--</div>
-    <div class="item" id="n1_uptime">🏠사무실:--</div>
-    <div class="item" id="n4_uptime">🌿온실하:--</div>
-    <div class="item" id="n2_uptime">🌿온실상:--</div> 
-    <div class="item" id="g3_uptime">🏢김 포3:--</div>
+    <div class="title">⏰🔄uptime </div>
+    <div class="item" id="n3_timeupload">🌿실 외1:--</div>
+    <div class="item" id="n1_timeupload">🏠사무실:--</div>
+    <div class="item" id="n4_timeupload">🌿온실하:--</div>
+    <div class="item" id="n2_timeupload">🌿온실상:--</div> 
+    <div class="item" id="g3_timeupload">🏢김 포3:--</div>
   </div>
 
 </div> 
@@ -156,11 +156,11 @@ async function update(){
   q("n2_hum").textContent  = `🌿 온실상 : ${Math.round(n2.field3)} %`;
   q("g3_hum").textContent  = `🏢 김 포3 : ${Math.round(g3.field3)} %`;
     
-  q("n3_uptime").textContent  = `🌿실 외1:${fmtDateTime(n3.created_at)}`;
-  q("n1_uptime").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
-  q("n4_uptime").textContent  = `🌿온실하:${fmtDateTime(n4.created_at)}`;
-  q("n2_uptime").textContent  = `🌿온실상:${fmtDateTime(n2.created_at)}`;
-  q("g3_uptime").textContent  = `🏢김 포3:${fmtDateTime(g3.created_at)}`;
+  q("n3_timeupload").textContent  = `🌿실 외1:${fmtDateTime(n3.created_at)}`;
+  q("n1_timeupload").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
+  q("n4_timeupload").textContent  = `🌿온실하:${fmtDateTime(n4.created_at)}`;
+  q("n2_timeupload").textContent  = `🌿온실상:${fmtDateTime(n2.created_at)}`;
+  q("g3_timeupload").textContent  = `🏢김 포3:${fmtDateTime(g3.created_at)}`;
   
 }
   
@@ -182,6 +182,7 @@ tickClock();
 
 </body>
 </html>
+
 
 
 
