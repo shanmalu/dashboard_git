@@ -149,13 +149,13 @@ async function update(){
   q("n4_temp").textContent = `🌷 온실하 : ${(+n4.field2).toFixed(1)} ℃`;
   q("g3_temp").textContent = `🏢 김 포3 : ${(+g3.field2).toFixed(1)} ℃`;
   
-  q("n3_hum").textContent  = `🌿 실 외1 : ${Math.round(n3.field3)} %`;
+  q("n3_hum").textContent  = `🌴 실 외1 : ${Math.round(n3.field3)} %`;
   q("n1_hum").textContent  = `🏠 컨테너 : ${Math.round(n1.field3)} %`;
-  q("n4_hum").textContent  = `🌿 온실하 : ${Math.round(n4.field3)} %`;
-  q("n2_hum").textContent  = `🌷 온실상 : ${Math.round(n2.field3)} %`;  
+  q("n2_hum").textContent  = `🌿 온실상 : ${Math.round(n2.field3)} %`;
+  q("n4_hum").textContent  = `🌷 온실하 : ${Math.round(n4.field3)} %`;    
   q("g3_hum").textContent  = `🏢 김 포3 : ${Math.round(g3.field3)} %`;
     
-  q("n3_timeupload").textContent  = `🌿실 외1:${fmtDateTime(n3.created_at)}`;
+  q("n3_timeupload").textContent  = `🌴실 외1:${fmtDateTime(n3.created_at)}`;
   q("n1_timeupload").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
   q("n2_timeupload").textContent  = `🌿온실상:${fmtDateTime(n2.created_at)}`;
   q("n4_timeupload").textContent  = `🌷온실하:${fmtDateTime(n4.created_at)}`;  
@@ -180,6 +180,7 @@ tickClock();
 
 </body>
 </html>
+
 
 
 
