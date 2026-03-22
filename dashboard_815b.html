@@ -6,7 +6,8 @@
 <style>
   body { font-family: system-ui, sans-serif; margin: 12px; background:#f7f7f9; }
   .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
-  .card { background:white; border-radius:14px; padding:8px; box-shadow:0 6px 12px rgba(0,0,0,.06); }
+  .card { background:white; border-radius:14px; padding:8px;
+          box-shadow:0 6px 12px rgba(0,0,0,.06); }
   .title { font-size:18px; margin-bottom:6px; }
   .value { font-size:18px; font-weight:700; margin-bottom:6px; } /* 측정값 */   
   .time { font-size:14px; color:#444; margin:2px 0; } /* 업로드시간 */ 
@@ -28,9 +29,8 @@
 <div class="label"> File: dashboard_815b.  </div> 
   
 <header>
-   <div class="header-box"> 
-   <h1> 📊 실시간&nbsp;측정치</h1></div>
-    <div class="clock" id="clock">--:--:--</div>  
+   <div class="header-box">    <h1> 📊 실시간&nbsp;측정치</h1></div> 
+   <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
 </header>
 
 <div class="grid">  
@@ -102,13 +102,13 @@
 </div> 
 
 <header>
-   <div class="header-box"> 
-   <h1> 📊 실시간&nbsp;측정치</h1></div>
-    <div class="clock" id="clock">--:--:--</div> 
-    </div>
-</header>  
-<div class="label"> File: dashboard_815b.  </div> 
+  <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+  <div class="header-box"><h1>📊 실시간&nbsp;측정치&nbsp; </h1></div>
+</header>
 
+<div class="label"> dashboard_827b.  </div>  
+<div class="label"> (v2026.3.22)  </div>
+  
 <script>
 const CHANNELS = {
   greenhouse: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
@@ -139,16 +139,12 @@ function fmtDateTime(dateStr) {
     return dateStr; }
  }
 
-function fmtClockTime() {
-  const d = new Date();
-  const y = String(d.getFullYear()).slice(2);
-  const m = d.getMonth() + 1;
-  const day = d.getDate();
-  const h = pad(d.getHours());
-  const min = pad(d.getMinutes());
-  const s = pad(d.getSeconds());
-  return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+function fmtClockTime(){
+  const d=new Date();
+  return ` ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}.` +
+         `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
  } 
+  
 async function fetchLastFeed({id, read_key}) {
   const keyParam = read_key ? `&api_key=${read_key}` : "";
   const url = `https://api.thingspeak.com/channels/${id}/feeds/last.json?${keyParam}`;
