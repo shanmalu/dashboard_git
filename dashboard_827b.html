@@ -162,7 +162,9 @@ async function update(){
   
 }
   
-
+setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
+update();
+setInterval(update,10000);
 
 function tickClock(){
   const time = fmtClockTime();
