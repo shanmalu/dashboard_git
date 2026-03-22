@@ -111,9 +111,8 @@ function fmtDateTime(dateStr) {
  }
 
 function fmtClockTime(){
-  const d = new Date();
-  const y = String(d.getFullYear()).slice(2);  // ⭐ 2자리 수정 핵심
-  return `${y}.${d.getMonth()+1}.${d.getDate()}. ` +
+  const d=new Date();
+  return ` ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}.` +
          `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 
 }
