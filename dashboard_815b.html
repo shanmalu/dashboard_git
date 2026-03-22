@@ -140,10 +140,15 @@ function fmtDateTime(dateStr) {
     return dateStr; }
  }
 
-function fmtClockTime(){
-  const d=new Date();
-  return ` ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}.` +
-         `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+function fmtClockTime() {
+  const d = new Date();
+  const y = String(d.getFullYear()).slice(2);
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
+  const h = pad(d.getHours());
+  const min = pad(d.getMinutes());
+  const s = pad(d.getSeconds());
+  return `${y}.${m}.${day}. ${h}:${min}:${s}`;
     
 async function fetchLastFeed({id, read_key}) {
   const keyParam = read_key ? `&api_key=${read_key}` : "";
