@@ -5,13 +5,13 @@
 <title>(15)827b.헤드2줄.uptime표시</title> 
 <style>
   body { font-family: system-ui, sans-serif; margin:12px; background:#f7f7f9; }
-  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); }
   .card { background:white; border-radius:14px; padding:4px; 
           box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
-  .title { font-size:17px; font-weight:700; margin-bottom:4px; }
+  .title { font-size:16px; font-weight:600; margin-bottom:4px; }
   .item  { font-size:16px; font-weight:600; margin:4px; text-align:center; } /* 측정값 */ 
   .timeupload { font-size: 14px; color:#444; margin:2px 0; } /* ThingSpeak업로드time */ 
-  .label { color:#666; font-size:14px; margin-bottom:10px; text-align:center;} /* 파일명 */ 
+  .label { color:#666; font-size:14px; margin-bottom:10px; text-align:center;} /* 파일명설명 */ 
      
   header {
     display: flex;
@@ -27,12 +27,12 @@
 </style>
 
 <body> 
-<div class="label"> (15)dashboard_827b.  </div>
+  <div class="label"> (15)dashboard_827b.  </div>
   
-  <header>
-    <div class="header-box"><h1>📊 실시간&nbsp;측정치&nbsp; </h1></div>
-    <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
-  </header>
+<header>
+  <div class="header-box"><h1>📊 실시간&nbsp;측정치&nbsp; </h1></div>
+  <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+</header>
 
 <div class="grid">
 
@@ -74,10 +74,11 @@
 
 </div> 
 
-<header class="page-header">
- <div class="header-box"> 
-    <div class="clock" id="clock"> --:--:-- </div>
-    <h1>📊 실시간 측정치</h1>
+<header>
+  <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+  <div class="header-box"><h1>📊 실시간&nbsp;측정치&nbsp; </h1></div>
+</header>
+
 <div class="label"> dashboard_827b.  </div>   
   
 <script>
