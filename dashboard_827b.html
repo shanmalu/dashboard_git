@@ -83,10 +83,10 @@
   
 <script>
 const CHANNELS = {
-  gma1:   { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
-  gma2:   { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
-  gma3:   { id: 3018897, read_key: "8LPG5E9FMQBPMT95" }, 
-  gma4:   { id: 3020435, read_key: "DQW527FW43D0I249" },
+  gmail1: { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+  gmail2: { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  gmail3: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" }, 
+  gmail4: { id: 3020435, read_key: "DQW527FW43D0I249" },
   naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
   naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
   naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
@@ -126,10 +126,10 @@ async function fetchLast({id, read_key}){
 
 async function update(){
   const [g1, g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
-    fetchLast(CHANNELS.gma1), 
-    fetchLast(CHANNELS.gma2),
-    fetchLast(CHANNELS.gma3), 
-    fetchLast(CHANNELS.gma4),   
+    fetchLast(CHANNELS.gmail1), 
+    fetchLast(CHANNELS.gmail2),
+    fetchLast(CHANNELS.gmail3), 
+    fetchLast(CHANNELS.gmail4),   
     fetchLast(CHANNELS.naver1),
     fetchLast(CHANNELS.naver2),
     fetchLast(CHANNELS.naver3),
