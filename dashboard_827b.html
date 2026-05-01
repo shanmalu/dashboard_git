@@ -138,9 +138,9 @@ async function update(){
 
   qsel("n3_lux").textContent  = `🌴 실외n1 : ${Math.round(n3.field1)} Lux`;
   qsel("n1_lux").textContent  = `🏠 컨테너 : ${Math.round(n1.field1)} Lux`;
-  qsel("n2_lux").textContent  = `🌞 온실상 : ${Math.round(n2.field1)} Lux`;
+  qsel("n2_lux").textContent  = `🌞 난상n2 : ${Math.round(n2.field1)} Lux`;
   qsel("n4_lux").textContent  = `🌱 온실하 : ${Math.round(n4.field1)} Lux`;  
-  qsel("g2_lux").textContent  = `🏢 김 포2 : ${Math.round(g2.field1)} Lux`;
+  qsel("g2_lux").textContent  = `🏢 난상g2 : ${Math.round(g2.field1)} Lux`;
    
   qsel("n3_temp").textContent = `🌴 실외n3 : ${(+n3.field2).toFixed(1)} ℃`;
   qsel("n1_temp").textContent = `🏠 컨테n1 : ${(+n1.field2).toFixed(1)} ℃`;
@@ -150,15 +150,15 @@ async function update(){
   
   qsel("n3_hum").textContent  = `🌴 실 외1 : ${Math.round(n3.field3)} %`;
   qsel("n1_hum").textContent  = `🏠 컨테너 : ${Math.round(n1.field3)} %`;
-  qsel("n2_hum").textContent  = `🌞 온실상 : ${Math.round(n2.field3)} %`;
+  qsel("n2_hum").textContent  = `🌞 난상n2 : ${Math.round(n2.field3)} %`;
   qsel("n4_hum").textContent  = `🌱 온실하 : ${Math.round(n4.field3)} %`;    
-  qsel("g2_hum").textContent  = `🏢 김 포2 : ${Math.round(g2.field3)} %`;
+  qsel("g2_hum").textContent  = `🏢 난상g2 : ${Math.round(g2.field3)} %`;
     
   qsel("n3_timeupload").textContent  = `🌴실 외1:${fmtDateTime(n3.created_at)}`;
   qsel("n1_timeupload").textContent  = `🏠컨테너:${fmtDateTime(n1.created_at)}`;
-  qsel("n2_timeupload").textContent  = `🌞온실상:${fmtDateTime(n2.created_at)}`;
+  qsel("n2_timeupload").textContent  = `🌞난상n2:${fmtDateTime(n2.created_at)}`;
   qsel("n4_timeupload").textContent  = `🌱온실하:${fmtDateTime(n4.created_at)}`;  
-  qsel("g2_timeupload").textContent  = `🏢김 포2:${fmtDateTime(g2.created_at)}`;
+  qsel("g2_timeupload").textContent  = `🏢난상g2:${fmtDateTime(g2.created_at)}`;
   
 }
   
