@@ -148,12 +148,12 @@ async function update(){
     fetchLast(CHANNELS.naver4),
   ]);
 
-  qsel("n1_lux").textContent  = `🏠 n1 : ${Math.round(n1.field1)} Lux`;
-  qsel("n2_lux").textContent  = `🌞 n2 : ${Math.round(n2.field1)} Lux`; 
-  qsel("n3_lux").textContent  = `🌴 n3 : ${Math.round(n3.field1)} Lux`;
-  qsel("n4_lux").textContent  = `🌱 n4 : ${Math.round(n4.field1)} Lux`; 
+  qsel("n1_lux").textContent  = `🏠컨테n1 : ${Math.round(n1.field1)} Lux`;
+  qsel("n2_lux").textContent  = `🌞난상n2 : ${Math.round(n2.field1)} Lux`; 
+  qsel("n3_lux").textContent  = `🌴실외n3 : ${Math.round(n3.field1)} Lux`;
+  qsel("n4_lux").textContent  = `🌱난하n4 : ${Math.round(n4.field1)} Lux`; 
   qsel("g1_lux").textContent  = `🏢 g1 : ${Math.round(g1.field1)} Lux`;
-  qsel("g2_lux").textContent  = `🏢 g2 : ${Math.round(g2.field1)} Lux`;
+  qsel("g2_lux").textContent  = `🌼난상g2 : ${Math.round(g2.field1)} Lux`;
   qsel("g3_lux").textContent  = `🏢 g3 : ${Math.round(g3.field1)} Lux`;
   qsel("g4_lux").textContent  = `🏢 g4 : ${Math.round(g4.field1)} Lux`;
   
@@ -162,7 +162,7 @@ async function update(){
   qsel("n3_temp").textContent = `🌴 n3 : ${(+n3.field2).toFixed(1)} ℃`;
   qsel("n4_temp").textContent = `🌷 n4 : ${(+n4.field2).toFixed(1)} ℃`;
   qsel("g1_temp").textContent = `🏢 g1  : ${(+g1.field1).toFixed(1)} ℃`;
-  qsel("g2_temp").textContent = `🏢 g2  : ${(+g2.field2).toFixed(1)} ℃`; 
+  qsel("g2_temp").textContent = `🌼 g2  : ${(+g2.field2).toFixed(1)} ℃`; 
   qsel("g3_temp").textContent = `🏢 g3  : ${(+g1.field3).toFixed(1)} ℃`;
   qsel("g4_temp").textContent = `🏢 g4  : ${(+g2.field4).toFixed(1)} ℃`;
  
@@ -171,7 +171,7 @@ async function update(){
   qsel("n3_hum").textContent  = `🌴 n3 : ${Math.round(n3.field3)} %`;
   qsel("n4_hum").textContent  = `🌱 n4 : ${Math.round(n4.field3)} %`; 
   qsel("g1_hum").textContent  = `🏢 g1 : ${Math.round(g1.field3)} %`;
-  qsel("g2_hum").textContent  = `🏢 g2 : ${Math.round(g2.field3)} %`;
+  qsel("g2_hum").textContent  = `🌼 g2 : ${Math.round(g2.field3)} %`;
   qsel("g3_hum").textContent  = `🏢 g3 : ${Math.round(g3.field3)} %`;
   qsel("g4_hum").textContent  = `🏢 g4 : ${Math.round(g4.field3)} %`;
     
@@ -180,7 +180,7 @@ async function update(){
   qsel("n3_timeupload").textContent  = `🌴 n3 : ${fmtDateTime(n3.created_at)}`;
   qsel("n4_timeupload").textContent  = `🌱 n4 : ${fmtDateTime(n4.created_at)}`; 
   qsel("g1_timeupload").textContent  = `🏢 g1 : ${fmtDateTime(g1.created_at)}`;
-  qsel("g2_timeupload").textContent  = `🏢 g2 : ${fmtDateTime(g2.created_at)}`;
+  qsel("g2_timeupload").textContent  = `🌼 g2 : ${fmtDateTime(g2.created_at)}`;
   qsel("g3_timeupload").textContent  = `🏢 g3 : ${fmtDateTime(g3.created_at)}`;
   qsel("g4_timeupload").textContent  = `🏢 g4 : ${fmtDateTime(g4.created_at)}`;
   
