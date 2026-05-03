@@ -41,8 +41,10 @@
     <div class="item" id="n2_temp">🌞 온실n2 : --</div>
     <div class="item" id="n3_temp">🌴 실외n3 : --</div> 
     <div class="item" id="n4_temp">🌱 온실n4 : --</div>  
-    <div class="item" id="g1_temp">🏢 난실g2 : --</div>    
-    <div class="item" id="g2_temp">🏢 난실g2 : --</div>  
+    <div class="item" id="g1_temp">🏢 난실g1 : --</div> 
+    <div class="item" id="g2_temp">🏢 난실g2 : --</div> 
+    <div class="item" id="g3_temp">🏢 난실g3 : --</div> 
+    <div class="item" id="g4_temp">🏢 난실g4 : --</div>
   </div>
 
   <div class="card">
@@ -51,8 +53,10 @@
     <div class="item" id="n2_lux">🌞 온실n2 : --</div>
     <div class="item" id="n3_lux">🌴 실 외1 : --</div> 
     <div class="item" id="n4_lux">🌱 온실n4 : --</div> 
-    <div class="item" id="g1_lux">🏢 김 포2 : --</div> 
-    <div class="item" id="g2_lux">🏢 김 포2 : --</div>     
+    <div class="item" id="g1_lux">🏢 김 포1 : --</div> 
+    <div class="item" id="g2_lux">🏢 김 포2 : --</div>
+    <div class="item" id="g3_lux">🏢 김 포3 : --</div> 
+    <div class="item" id="g4_lux">🏢 김 포4 : --</div>
     </div>
   
   <div class="card">
@@ -61,8 +65,10 @@
     <div class="item" id="n3_hum">🌴 실외n1 : --</div>
     <div class="item" id="n4_hum">🌱 온실n4 : --</div>      
     <div class="item" id="n2_hum">🌞 온실n2 : --</div> 
-    <div class="item" id="g1_hum">🏢 난실g2 : --</div> 
-    <div class="item" id="g2_hum">🏢 난실g2 : --</div>  
+    <div class="item" id="g1_hum">🏢 난실g1 : --</div> 
+    <div class="item" id="g2_hum">🏢 난실g2 : --</div>
+    <div class="item" id="g3_hum">🏢 난실g3 : --</div> 
+    <div class="item" id="g4_hum">🏢 난실g4 : --</div>
   </div>
 
     <div class="card">
@@ -71,8 +77,10 @@
     <div class="item" id="n1_timeupload">🏠컨테n1:--</div>   
     <div class="item" id="n4_timeupload">🌱온실n4:--</div>      
     <div class="item" id="n2_timeupload">🌞온실n2:--</div> 
-    <div class="item" id="g1_timeupload">🏢온실g2:--</div>
-    <div class="item" id="g2_timeupload">🏢온실g2:--</div>  
+    <div class="item" id="g1_timeupload">🏢온실g1:--</div>
+    <div class="item" id="g2_timeupload">🏢온실g2:--</div>
+    <div class="item" id="g3_timeupload">🏢온실g3:--</div>  
+    <div class="item" id="g4_timeupload">🏢온실g4:--</div>  
     </div>
 
 </div> 
@@ -144,15 +152,19 @@ async function update(){
   qsel("n2_lux").textContent  = `🌞 난상n2 : ${Math.round(n2.field1)} Lux`; 
   qsel("n3_lux").textContent  = `🌴 실외n3 : ${Math.round(n3.field1)} Lux`;
   qsel("n4_lux").textContent  = `🌱 난하n4 : ${Math.round(n4.field1)} Lux`; 
-  qsel("g1_lux").textContent  = `🏢 g1 : ${Math.round(g1.field1)} Lux`;
+  qsel("g1_lux").textContent  = `🏢 미상g1 : ${Math.round(g1.field1)} Lux`;
   qsel("g2_lux").textContent  = `🏢 난상g2 : ${Math.round(g2.field1)} Lux`;
+  qsel("g3_lux").textContent  = `🏢 난상g3 : ${Math.round(g3.field1)} Lux`;
+  qsel("g4_lux").textContent  = `🏢 난상g4 : ${Math.round(g4.field1)} Lux`;
   
   qsel("n1_temp").textContent = `🏠 컨테n1 : ${(+n1.field2).toFixed(1)} ℃`;
   qsel("n2_temp").textContent = `🌞 난상n2 : ${(+n2.field2).toFixed(1)} ℃`;  
   qsel("n3_temp").textContent = `🌴 실외n3 : ${(+n3.field2).toFixed(1)} ℃`;
   qsel("n4_temp").textContent = `🌷 난하n4 : ${(+n4.field2).toFixed(1)} ℃`;
-  qsel("g1_temp").textContent = `🏢 미상g2  : ${(+g1.field2).toFixed(1)} ℃`;
-  qsel("g2_temp").textContent = `🏢 난상g2  : ${(+g2.field2).toFixed(1)} ℃`;
+  qsel("g1_temp").textContent = `🏢 미상g1  : ${(+g1.field1).toFixed(1)} ℃`;
+  qsel("g2_temp").textContent = `🏢 난상g2  : ${(+g2.field2).toFixed(1)} ℃`; 
+  qsel("g3_temp").textContent = `🏢 미상g1  : ${(+g1.field3).toFixed(1)} ℃`;
+  qsel("g4_temp").textContent = `🏢 난상g2  : ${(+g2.field4).toFixed(1)} ℃`;
  
   qsel("n1_hum").textContent  = `🏠 컨테n1 : ${Math.round(n1.field3)} %`;
   qsel("n2_hum").textContent  = `🌞 난상n2 : ${Math.round(n2.field3)} %`;    
@@ -160,13 +172,17 @@ async function update(){
   qsel("n4_hum").textContent  = `🌱 온실n4 : ${Math.round(n4.field3)} %`; 
   qsel("g1_hum").textContent  = `🏢 미상g1 : ${Math.round(g1.field3)} %`;
   qsel("g2_hum").textContent  = `🏢 난상g2 : ${Math.round(g2.field3)} %`;
+  qsel("g3_hum").textContent  = `🏢 미상g3 : ${Math.round(g3.field3)} %`;
+  qsel("g4_hum").textContent  = `🏢 난상g4 : ${Math.round(g4.field3)} %`;
     
   qsel("n1_timeupload").textContent  = `🏠컨테n1:${fmtDateTime(n1.created_at)}`;
   qsel("n2_timeupload").textContent  = `🌞난상n2:${fmtDateTime(n2.created_at)}`; 
   qsel("n3_timeupload").textContent  = `🌴실외n3:${fmtDateTime(n3.created_at)}`;
   qsel("n4_timeupload").textContent  = `🌱온실n4:${fmtDateTime(n4.created_at)}`; 
-  qsel("g1_timeupload").textContent  = `🏢미상g2:${fmtDateTime(g1.created_at)}`;
+  qsel("g1_timeupload").textContent  = `🏢미상g1:${fmtDateTime(g1.created_at)}`;
   qsel("g2_timeupload").textContent  = `🏢난상g2:${fmtDateTime(g2.created_at)}`;
+  qsel("g3_timeupload").textContent  = `🏢미상g3:${fmtDateTime(g3.created_at)}`;
+  qsel("g4_timeupload").textContent  = `🏢난상g4:${fmtDateTime(g4.created_at)}`;
   
 }
   
