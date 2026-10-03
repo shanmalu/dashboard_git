@@ -148,14 +148,14 @@ async function update(){
     fetchLast(CHANNELS.naver4),
   ]);
 
-  qsel("n1_lux").textContent  = `🏠 n1 컨테 : ${Math.round(n1.field1)} Lx`;
-  qsel("n2_lux").textContent  = `🌞 n2 김포 : ${Math.round(n2.field1)} Lx`; 
-  qsel("n3_lux").textContent  = `🌴 n3 실외 : ${Math.round(n3.field1)} Lx`;
-  qsel("n4_lux").textContent  = `🌷 n4 난하 : ${Math.round(n4.field1)} Lx`; 
-  qsel("g1_lux").textContent  = `🌷g1김포b5: ${Math.round(g1.field1)} Lx`;
-  qsel("g2_lux").textContent  = `🌼 g2 난상 : ${Math.round(g2.field1)} Lx`;
-  qsel("g3_lux").textContent  = `🌷 g3 김포 : ${Math.round(g3.field1)} Lx`;
-  qsel("g4_lux").textContent  = `🌷 g4 난실 : ${Math.round(g4.field1)} Lx`;
+  qsel("n1_lux").textContent  = `🏠n1컨테 : ${Math.round(n1.field1)} Lx`;
+  qsel("n2_lux").textContent  = `🌞n2김포 : ${Math.round(n2.field1)} Lx`; 
+  qsel("n3_lux").textContent  = `🌴n3실외 : ${Math.round(n3.field1)} Lx`;
+  qsel("n4_lux").textContent  = `🌷n4난하 : ${Math.round(n4.field1)} Lx`; 
+  qsel("g1_lux").textContent  = `🌷g1김포5: ${Math.round(g1.field1)} Lx`;
+  qsel("g2_lux").textContent  = `🌼g2난상 : ${Math.round(g2.field1)} Lx`;
+  qsel("g3_lux").textContent  = `🌷g3김포 : ${Math.round(g3.field1)} Lx`;
+  qsel("g4_lux").textContent  = `🌷g4난실 : ${Math.round(g4.field1)} Lx`;
   
   qsel("n1_temp").textContent = `🏠 n1 컨테 : ${(+n1.field2).toFixed(1)} ℃`;
   qsel("n2_temp").textContent = `🌞 n2 김포 : ${(+n2.field2).toFixed(1)} ℃`;  
