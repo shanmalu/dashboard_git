@@ -55,11 +55,11 @@
   </div> 
   <div class="card">
     <div class="title">💡 조 명 (Lux) </div>
-    <div class="item" id="n3_lux">🌴실외n3 : --</div> 
-    <div class="item" id="n4_lux">🌱난하n4 : --</div>      
-    <div class="item" id="g2_lux">🌞난상g2 : --</div>          
-    <div class="item" id="n1_lux">🏠컨테n1 : --</div> 
-    <div class="item" id="n2_lux">🏢김포n2 : --</div>
+    <div class="item" id="n3_lx">🌴실외n3 : --</div> 
+    <div class="item" id="n4_lx">🌱난하n4 : --</div>      
+    <div class="item" id="g2_lx">🌞난상g2 : --</div>          
+    <div class="item" id="n1_lx">🏠컨테n1 : --</div> 
+    <div class="item" id="n2_lx">🏢김포n2 : --</div>
   </div>   
 
     <div class="card">
@@ -136,11 +136,11 @@ async function update(){
     fetchLast(CHANNELS.naver4),
   ]);
 
-  qsel("n1_lux").textContent  = `🏠 컨테n1 : ${Math.round(n1.field1)} Lux`;
-  qsel("n2_lux").textContent  = `🏢 김포n2 : ${Math.round(n2.field1)} Lux`; 
-  qsel("n3_lux").textContent  = `🌴 실외n3 : ${Math.round(n3.field1)} Lux`;
-  qsel("n4_lux").textContent  = `🌱난하n4: ${Math.round(n4.field1)} Lux`;  
-  qsel("g2_lux").textContent  = `🌞 난상g2 : ${Math.round(g2.field1)} Lux`;
+  qsel("n1_lx").textContent  = `🏠 컨테n1 : ${Math.round(n1.field1)} Lx`;
+  qsel("n2_lx").textContent  = `🏢 김포n2 : ${Math.round(n2.field1)} Lx`; 
+  qsel("n3_lx").textContent  = `🌴 실외n3 : ${Math.round(n3.field1)} Lx`;
+  qsel("n4_lx").textContent  = `🌱난하n4: ${Math.round(n4.field1)} Lx`;  
+  qsel("g2_lx").textContent  = `🌞 난상g2 : ${Math.round(g2.field1)} Lx`;
   
   qsel("n1_temp").textContent = `🏠 컨테n1 : ${(+n1.field2).toFixed(1)} ℃`;
   qsel("n2_temp").textContent = `🏢 김포n2 : ${(+n2.field2).toFixed(1)} ℃`;  
