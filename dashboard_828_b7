@@ -41,7 +41,7 @@
     <div class="item" id="n2_temp">🌞 n2 : --</div>
     <div class="item" id="n3_temp">🌴 n3 : --</div> 
     <div class="item" id="n4_temp">🌱 n4 : --</div>  
-    <div class="item" id="g1_temp">🏢 g1 : --</div> 
+  /  <div class="item" id="g1_temp">🏢 g1 : --</div> /
     <div class="item" id="g2_temp">🏢 g2 : --</div> 
     <div class="item" id="g3_temp">🏢 g3 : --</div> 
     <div class="item" id="g4_temp">🏢 g4 : --</div>
@@ -53,7 +53,7 @@
     <div class="item" id="n2_lux">🌞 n2 : --</div>
     <div class="item" id="n3_lux">🌴 n3 : --</div> 
     <div class="item" id="n4_lux">🌱 n4 : --</div> 
-    <div class="item" id="g1_lux">🏢 g1 : --</div> 
+  /  <div class="item" id="g1_lux">🏢 g1 : --</div> /
     <div class="item" id="g2_lux">🏢 g2 : --</div>
     <div class="item" id="g3_lux">🏢 g3 : --</div> 
     <div class="item" id="g4_lux">🏢 g4 : --</div>
@@ -65,7 +65,7 @@
     <div class="item" id="n2_hum">🌞 n2 : --</div>
     <div class="item" id="n3_hum">🌴 n3 : --</div>
     <div class="item" id="n4_hum">🌱 n4 : --</div>      
-    <div class="item" id="g1_hum">🏢 g1 : --</div> 
+  /  <div class="item" id="g1_hum">🏢 g1 : --</div> /
     <div class="item" id="g2_hum">🏢 g2 : --</div>
     <div class="item" id="g3_hum">🏢 g3 : --</div> 
     <div class="item" id="g4_hum">🏢 g4 : --</div>
@@ -77,7 +77,7 @@
     <div class="item" id="n2_timeupload">🌞n2:--</div>
     <div class="item" id="n3_timeupload">🌴n3:--</div>   
     <div class="item" id="n4_timeupload">🌱n4:--</div>   
-    <div class="item" id="g1_timeupload">🏢g1:--</div>
+  /  <div class="item" id="g1_timeupload">🏢g1:--</div>/
     <div class="item" id="g2_timeupload">🏢g2:--</div>
     <div class="item" id="g3_timeupload">🏢g3:--</div>  
     <div class="item" id="g4_timeupload">🏢g4:--</div>  
@@ -150,7 +150,7 @@ async function update(){
 
   qsel("n1_lux").textContent  = `🏠n1컨테5: ${Math.round(n1.field1)} Lx`;
   qsel("n2_lux").textContent  = `🏢n2김포6: ${Math.round(n2.field1)} Lx`; 
-  qsel("n3_lux").textContent  = `🌴n3xxxx1: ${Math.round(n3.field1)} Lx`;
+  qsel("n3_lux").textContent  = `🌴n3김포1: ${Math.round(n3.field1)} Lx`;
   qsel("n4_lux").textContent  = `🌷n4난하4: ${Math.round(n4.field1)} Lx`; 
   qsel("g1_lux").textContent  = `🏢g1컨외9: ${Math.round(g1.field1)} Lx`;
   qsel("g2_lux").textContent  = `🌞g2난상3: ${Math.round(g2.field1)} Lx`;
@@ -159,7 +159,7 @@ async function update(){
   
   qsel("n1_temp").textContent = `🏠n1컨테5: ${(+n1.field2).toFixed(1)} ℃`;
   qsel("n2_temp").textContent = `🏢n2김포6: ${(+n2.field2).toFixed(1)} ℃`;  
-  qsel("n3_temp").textContent = `🌴n3xxxx1: ${(+n3.field2).toFixed(1)} ℃`;
+  qsel("n3_temp").textContent = `🌴n3김포1: ${(+n3.field2).toFixed(1)} ℃`;
   qsel("n4_temp").textContent = `🌷n4난하4: ${(+n4.field2).toFixed(1)} ℃`;
   qsel("g1_temp").textContent = `🏢g1컨외9: ${(+g1.field2).toFixed(1)} ℃`;
   qsel("g2_temp").textContent = `🌞g2난상3: ${(+g2.field2).toFixed(1)} ℃`; 
@@ -168,7 +168,7 @@ async function update(){
  
   qsel("n1_hum").textContent  = `🏠n1컨테5 : ${Math.round(n1.field3)} %`;
   qsel("n2_hum").textContent  = `🏢n2김포6: ${Math.round(n2.field3)} %`;    
-  qsel("n3_hum").textContent  = `🌴n3xxx1: ${Math.round(n3.field3)} %`;
+  qsel("n3_hum").textContent  = `🌴n3김포1: ${Math.round(n3.field3)} %`;
   qsel("n4_hum").textContent  = `🌷n4난하4: ${Math.round(n4.field3)} %`; 
   qsel("g1_hum").textContent  = `🏢g1컨외9: ${Math.round(g1.field3)} %`;
   qsel("g2_hum").textContent  = `🌞g2난상3: ${Math.round(g2.field3)} %`;
@@ -177,7 +177,7 @@ async function update(){
     
   qsel("n1_timeupload").textContent  = `🏠n1컨테5: ${fmtDateTime(n1.created_at)}`;
   qsel("n2_timeupload").textContent  = `🏢n2김포6: ${fmtDateTime(n2.created_at)}`; 
-  qsel("n3_timeupload").textContent  = `🌴n3xxxx1: ${fmtDateTime(n3.created_at)}`;
+  qsel("n3_timeupload").textContent  = `🌴n3김포1: ${fmtDateTime(n3.created_at)}`;
   qsel("n4_timeupload").textContent  = `🌷n4난하4: ${fmtDateTime(n4.created_at)}`; 
   qsel("g1_timeupload").textContent  = `🏢g1컨외9: ${fmtDateTime(g1.created_at)}`;
   qsel("g2_timeupload").textContent  = `🌞g2난상3: ${fmtDateTime(g2.created_at)}`;
