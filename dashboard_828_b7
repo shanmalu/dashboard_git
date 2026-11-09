@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko"> 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>828.8개.uptime(v2026.5.3)</title> 
+<style>
+  body { font-family: system-ui, sans-serif; margin:12px; background:#f7f7f9; }
+  .grid { display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); }
+  .card { background:white; border-radius:14px; padding:4px; 
+          box-shadow:0 6px 12px rgba(0,0,0,.06); text-align:center; }
+  .title { font-size:16px; font-weight:600; margin-bottom:4px; }
+  .item  { font-size:16px; margin:2px; text-align:center; } /* 측정값 */ 
+  .timeupload { font-size: 14px; color:#444; margin:2px 0; } /* ThingSpeak업로드time */ 
+  .label { color:#666; font-size:14px; margin-bottom:6px; text-align:center;} /* 파일명설명 */ 
+     
+ header { display: flex;
+  flex-direction: column;  /* 세로 배치. 26.6.21.qsel명칭 ch순으로 변경 */
+  align-items: center;    /*  가로 중앙 */
+  justify-content: center; /* 세로 중앙 */
+  margin-bottom: 2px; } 
+ .header-box { width: auto;}
+  
+ h1 { font-size:16px; margin:2px; }
+ .clock { font-size:16px; color:#333; } 
+  
+</style>
+
+<body> 
+  <div class="label"> (16)dashboard_828.  </div>
+  
+<header>
+  <div class="header-box"><h1>📊실시간 측정치&nbsp; </h1></div>
+  <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="title">🌡️ 온 도 (℃) </div> 
+    <div class="item" id="n1_temp">🏠 n1 : --</div> 
+    <div class="item" id="n2_temp">🌞 n2 : --</div>
+    <div class="item" id="n3_temp">🌴 n3 : --</div> 
+    <div class="item" id="n4_temp">🌱 n4 : --</div>  
+    <div class="item" id="g1_temp">🏢 g1 : --</div> 
+    <div class="item" id="g2_temp">🏢 g2 : --</div> 
+    <div class="item" id="g3_temp">🏢 g3 : --</div> 
+    <div class="item" id="g4_temp">🏢 g4 : --</div>
+  </div>
+
+  <div class="card">
+    <div class="title">💡 조 명 (Lux) </div> 
+    <div class="item" id="n1_lux">🏠 n1 : --</div> 
+    <div class="item" id="n2_lux">🌞 n2 : --</div>
+    <div class="item" id="n3_lux">🌴 n3 : --</div> 
+    <div class="item" id="n4_lux">🌱 n4 : --</div> 
+    <div class="item" id="g1_lux">🏢 g1 : --</div> 
+    <div class="item" id="g2_lux">🏢 g2 : --</div>
+    <div class="item" id="g3_lux">🏢 g3 : --</div> 
+    <div class="item" id="g4_lux">🏢 g4 : --</div>
+    </div>
+  
+  <div class="card">
+    <div class="title">💧 습 도 (%) </div> 
+    <div class="item" id="n1_hum">🏠 n1 : --</div> 
+    <div class="item" id="n2_hum">🌞 n2 : --</div>
+    <div class="item" id="n3_hum">🌴 n3 : --</div>
+    <div class="item" id="n4_hum">🌱 n4 : --</div>      
+    <div class="item" id="g1_hum">🏢 g1 : --</div> 
+    <div class="item" id="g2_hum">🏢 g2 : --</div>
+    <div class="item" id="g3_hum">🏢 g3 : --</div> 
+    <div class="item" id="g4_hum">🏢 g4 : --</div>
+  </div>
+
+    <div class="card">
+    <div class="title">⏰ uptime </div>     
+    <div class="item" id="n1_timeupload">🏠n1:--</div> 
+    <div class="item" id="n2_timeupload">🌞n2:--</div>
+    <div class="item" id="n3_timeupload">🌴n3:--</div>   
+    <div class="item" id="n4_timeupload">🌱n4:--</div>   
+    <div class="item" id="g1_timeupload">🏢g1:--</div>
+    <div class="item" id="g2_timeupload">🏢g2:--</div>
+    <div class="item" id="g3_timeupload">🏢g3:--</div>  
+    <div class="item" id="g4_timeupload">🏢g4:--</div>  
+    </div>
+
+</div> 
+
+<header>
+  <div class="header-box"><div class="clock" id="clock">--:--:--</div></div>
+  <div class="header-box"><h1>📊 실시간&nbsp;측정치&nbsp; </h1></div>
+</header>
+
+<div class="label"> dashboard_828.  </div>  
+<div class="label"> (v2026.5.3)  </div>
+  
+<script>
+const CHANNELS = {
+  gmail1: { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+  gmail2: { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  gmail3: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" }, 
+  gmail4: { id: 3020435, read_key: "DQW527FW43D0I249" },
+  naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
+  naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
+  naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
+};
+
+function qsel(id){ return document.getElementById(id); }
+function pad(n){ return n.toString().padStart(2,"0"); }
+
+function fmtDateTime(dateStr) {
+  try {
+    const d = new Date(dateStr);
+    const y = String(d.getFullYear()).slice(2); 
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+    const h = pad(d.getHours());
+    const min = pad(d.getMinutes());
+    const s = pad(d.getSeconds());
+    return `${m}/${day}.${h}:${min}:${s}`;
+   }
+  catch (e) {
+    return dateStr; }
+ }
+
+function fmtClockTime(){
+  const d=new Date();
+  return ` ${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}.` +
+         ` ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+
+}
+
+async function fetchLast({id, read_key}){
+  const url=`https://api.thingspeak.com/channels/${id}/feeds/last.json?api_key=${read_key}`;
+  const r=await fetch(url);
+  return r.json();
+}
+
+async function update(){
+  const [g1, g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
+    fetchLast(CHANNELS.gmail1), 
+    fetchLast(CHANNELS.gmail2),
+    fetchLast(CHANNELS.gmail3), 
+    fetchLast(CHANNELS.gmail4),   
+    fetchLast(CHANNELS.naver1),
+    fetchLast(CHANNELS.naver2),
+    fetchLast(CHANNELS.naver3),
+    fetchLast(CHANNELS.naver4),
+  ]);
+
+  qsel("n1_lux").textContent  = `🏠n1컨테5: ${Math.round(n1.field1)} Lx`;
+  qsel("n2_lux").textContent  = `🏢n2김포6: ${Math.round(n2.field1)} Lx`; 
+  qsel("n3_lux").textContent  = `🌴n3xxxx1: ${Math.round(n3.field1)} Lx`;
+  qsel("n4_lux").textContent  = `🌷n4난하4: ${Math.round(n4.field1)} Lx`; 
+  qsel("g1_lux").textContent  = `🏢g1컨외9: ${Math.round(g1.field1)} Lx`;
+  qsel("g2_lux").textContent  = `🌞g2난상3: ${Math.round(g2.field1)} Lx`;
+  qsel("g3_lux").textContent  = `🏢g3버섯7: ${Math.round(g3.field1)} Lx`;
+  qsel("g4_lux").textContent  = `🌷g4난실8: ${Math.round(g4.field1)} Lx`;
+  
+  qsel("n1_temp").textContent = `🏠n1컨테5: ${(+n1.field2).toFixed(1)} ℃`;
+  qsel("n2_temp").textContent = `🏢n2김포6: ${(+n2.field2).toFixed(1)} ℃`;  
+  qsel("n3_temp").textContent = `🌴n3xxxx1: ${(+n3.field2).toFixed(1)} ℃`;
+  qsel("n4_temp").textContent = `🌷n4난하4: ${(+n4.field2).toFixed(1)} ℃`;
+  qsel("g1_temp").textContent = `🏢g1컨외9: ${(+g1.field2).toFixed(1)} ℃`;
+  qsel("g2_temp").textContent = `🌞g2난상3: ${(+g2.field2).toFixed(1)} ℃`; 
+  qsel("g3_temp").textContent = `🏢g3버섯7: ${(+g3.field2).toFixed(1)} ℃`;
+  qsel("g4_temp").textContent = `🌷g4난실8: ${(+g4.field2).toFixed(1)} ℃`;
+ 
+  qsel("n1_hum").textContent  = `🏠n1컨테5 : ${Math.round(n1.field3)} %`;
+  qsel("n2_hum").textContent  = `🏢n2김포6: ${Math.round(n2.field3)} %`;    
+  qsel("n3_hum").textContent  = `🌴n3xxx1: ${Math.round(n3.field3)} %`;
+  qsel("n4_hum").textContent  = `🌷n4난하4: ${Math.round(n4.field3)} %`; 
+  qsel("g1_hum").textContent  = `🏢g1컨외9: ${Math.round(g1.field3)} %`;
+  qsel("g2_hum").textContent  = `🌞g2난상3: ${Math.round(g2.field3)} %`;
+  qsel("g3_hum").textContent  = `🏢g3버섯7: ${Math.round(g3.field3)} %`;
+  qsel("g4_hum").textContent  = `🌷g4난실8: ${Math.round(g4.field3)} %`;
+    
+  qsel("n1_timeupload").textContent  = `🏠n1컨테5: ${fmtDateTime(n1.created_at)}`;
+  qsel("n2_timeupload").textContent  = `🏢n2김포6: ${fmtDateTime(n2.created_at)}`; 
+  qsel("n3_timeupload").textContent  = `🌴n3xxxx1: ${fmtDateTime(n3.created_at)}`;
+  qsel("n4_timeupload").textContent  = `🌷n4난하4: ${fmtDateTime(n4.created_at)}`; 
+  qsel("g1_timeupload").textContent  = `🏢g1컨외9: ${fmtDateTime(g1.created_at)}`;
+  qsel("g2_timeupload").textContent  = `🌞g2난상3: ${fmtDateTime(g2.created_at)}`;
+  qsel("g3_timeupload").textContent  = `🏢g3버섯7: ${fmtDateTime(g3.created_at)}`;
+  qsel("g4_timeupload").textContent  = `🌷g4난실8: ${fmtDateTime(g4.created_at)}`;
+  
+}
+  
+setInterval(()=>q("clock").textContent=fmtClockTime(),1000);
+update();
+setInterval(update,10000);
+
+function tickClock(){
+  const time = fmtClockTime();
+  document.querySelectorAll(".clock")
+    .forEach(el => el.textContent = time);
+}
+
+setInterval(tickClock, 1000);
+tickClock();
+  
+</script>
+
+</body>
+</html>
