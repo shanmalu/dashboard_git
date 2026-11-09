@@ -63,7 +63,7 @@
     <div class="item" id="n2_hum">🌞 n2 : --</div>
     <div class="item" id="n3_hum">🌴 n3 : --</div>
     <div class="item" id="n4_hum">🌱 n4 : --</div>   
-     <div class="item" id="g2_hum">🏢 g2 : --</div>
+    <div class="item" id="g2_hum">🏢 g2 : --</div>
     <div class="item" id="g3_hum">🏢 g3 : --</div> 
     <div class="item" id="g4_hum">🏢 g4 : --</div>
   </div>
@@ -91,7 +91,6 @@
   
 <script>
 const CHANNELS = {
-  gmail1: { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
   gmail2: { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
   gmail3: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" }, 
   gmail4: { id: 3020435, read_key: "DQW527FW43D0I249" },
@@ -133,8 +132,7 @@ async function fetchLast({id, read_key}){
 }
 
 async function update(){
-  const [g1, g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
-    fetchLast(CHANNELS.gmail1), 
+  const [g2, g3, g4, n1,n2,n3,n4]=await Promise.all([
     fetchLast(CHANNELS.gmail2),
     fetchLast(CHANNELS.gmail3), 
     fetchLast(CHANNELS.gmail4),   
@@ -148,7 +146,7 @@ async function update(){
   qsel("n2_lux").textContent  = `🏢n2김포6: ${Math.round(n2.field1)} Lx`; 
   qsel("n3_lux").textContent  = `🌴n3김포1: ${Math.round(n3.field1)} Lx`;
   qsel("n4_lux").textContent  = `🌷n4난하4: ${Math.round(n4.field1)} Lx`; 
-   qsel("g2_lux").textContent  = `🌞g2난상3: ${Math.round(g2.field1)} Lx`;
+  qsel("g2_lux").textContent  = `🌞g2난상3: ${Math.round(g2.field1)} Lx`;
   qsel("g3_lux").textContent  = `🏢g3버섯7: ${Math.round(g3.field1)} Lx`;
   qsel("g4_lux").textContent  = `🌷g4난실8: ${Math.round(g4.field1)} Lx`;
   
@@ -156,7 +154,7 @@ async function update(){
   qsel("n2_temp").textContent = `🏢n2김포6: ${(+n2.field2).toFixed(1)} ℃`;  
   qsel("n3_temp").textContent = `🌴n3김포1: ${(+n3.field2).toFixed(1)} ℃`;
   qsel("n4_temp").textContent = `🌷n4난하4: ${(+n4.field2).toFixed(1)} ℃`;
-    qsel("g2_temp").textContent = `🌞g2난상3: ${(+g2.field2).toFixed(1)} ℃`; 
+  qsel("g2_temp").textContent = `🌞g2난상3: ${(+g2.field2).toFixed(1)} ℃`; 
   qsel("g3_temp").textContent = `🏢g3버섯7: ${(+g3.field2).toFixed(1)} ℃`;
   qsel("g4_temp").textContent = `🌷g4난실8: ${(+g4.field2).toFixed(1)} ℃`;
  
@@ -164,7 +162,7 @@ async function update(){
   qsel("n2_hum").textContent  = `🏢n2김포6: ${Math.round(n2.field3)} %`;    
   qsel("n3_hum").textContent  = `🌴n3김포1: ${Math.round(n3.field3)} %`;
   qsel("n4_hum").textContent  = `🌷n4난하4: ${Math.round(n4.field3)} %`; 
-   qsel("g2_hum").textContent  = `🌞g2난상3: ${Math.round(g2.field3)} %`;
+  qsel("g2_hum").textContent  = `🌞g2난상3: ${Math.round(g2.field3)} %`;
   qsel("g3_hum").textContent  = `🏢g3버섯7: ${Math.round(g3.field3)} %`;
   qsel("g4_hum").textContent  = `🌷g4난실8: ${Math.round(g4.field3)} %`;
     
