@@ -159,49 +159,49 @@ async function update() {
       fetchLastFeed(CHANNELS.naver4),     
     ]);
 
-    // 온실g1
+    // g1
     qsel("g1v_lux").textContent  = ` 💡조명: ${Math.round(+g1v.field1||0)} Lux`;
     qsel("g1v_temp").textContent = ` 🌡️온도: ${(+g1v.field2||0).toFixed(1)} ℃`;
     qsel("g1v_hum").textContent  = ` 💧습도: ${Math.round(+g1v.field3||0)} %`;
     qsel("g1v_time").textContent = ` update: ${fmtDateTime(g1v.created_at)}`;
     
-    // 사무실g2
+    // g2
     qsel("g2o_lux").textContent  = ` 💡조명: ${Math.round(+g2o.field1||0)} Lux`;
     qsel("g2o_temp").textContent = ` 🌡️온도: ${(+g2o.field2||0).toFixed(1)} ℃`;
     qsel("g2o_hum").textContent  = ` 💧습도: ${Math.round(+g2o.field3||0)} %`;
     qsel("g2o_time").textContent = ` update: ${fmtDateTime(g2o.created_at)}`; 
 
-    // 집g3
+    // g3
     qsel("g3g_lux").textContent  = ` 💡조명: ${Math.round(+g3g.field1||0)} Lux`;
     qsel("g3g_temp").textContent = ` 🌡️온도: ${(+g3g.field2||0).toFixed(1)} ℃`;
     qsel("g3g_hum").textContent  = ` 💧습도: ${Math.round(+g3g.field3||0)} %`;
     qsel("g3g_time").textContent = ` update: ${fmtDateTime(g3g.created_at)}`;
 
-    // 베란다g4
+    // g4
     qsel("g4h_lux").textContent  = ` 💡조명: ${Math.round(+g4h.field1||0)} Lux`;
     qsel("g4h_temp").textContent = ` 🌡️온도: ${(+g4h.field2||0).toFixed(1)} ℃`;
     qsel("g4h_hum").textContent  = ` 💧습도: ${Math.round(+g4h.field3||0)} %`;
     qsel("g4h_time").textContent = ` update: ${fmtDateTime(g4h.created_at)}`;
     
-    // 네이버n1
+    // n1
     qsel("n1_lux").textContent  = ` 💡조명: ${Math.round(+n1.field1||0)} Lux`;
     qsel("n1_temp").textContent = ` 🌡️온도: ${(+n1.field2||0).toFixed(1)} ℃`;
     qsel("n1_hum").textContent  = ` 💧습도: ${Math.round(+n1.field3||0)} %`;
     qsel("n1_time").textContent = ` update: ${fmtDateTime(n1.created_at)}`;
         
-    //네이버n2
+    // n2
     qsel("n2_lux").textContent  = ` 💡조명: ${Math.round(+n2.field1||0)} Lux`;
     qsel("n2_temp").textContent = ` 🌡️온도: ${(+n2.field2||0).toFixed(1)} ℃`;
     qsel("n2_hum").textContent  = ` 💧습도: ${Math.round(+n2.field3||0)} %`;
     qsel("n2_time").textContent = ` update: ${fmtDateTime(n2.created_at)}`;
             
-    // 네이버n3
+    // n3
     qsel("n3_lux").textContent  = ` 💡조명: ${Math.round(+n3.field1||0)} Lux`;
     qsel("n3_temp").textContent = ` 🌡️온도: ${(+n3.field2||0).toFixed(1)} ℃`;
     qsel("n3_hum").textContent  = ` 💧습도: ${Math.round(+n3.field3||0)} %`;
     qsel("n3_time").textContent = ` update: ${fmtDateTime(n3.created_at)}`;
             
-    // 네이버n4
+    // n4
     qsel("n4_lux").textContent  = ` 💡조명: ${Math.round(+n4.field1||0)} Lux`;
     qsel("n4_temp").textContent = ` 🌡️온도: ${(+n4.field2||0).toFixed(1)} ℃`;
     qsel("n4_hum").textContent  = ` 💧습도: ${Math.round(+n4.field3||0)} %`;
