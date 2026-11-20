@@ -7,78 +7,27 @@
 <title>816(v2026.11.20)</title>
 
 <style>
-  body {
-    font-family: system-ui, sans-serif;
-    margin: 12px;
-    background: #f7f7f9;
-  }
+  body { font-family: system-ui, sans-serif; margin: 12px; background: #f7f7f9; }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .card { background: white; border-radius: 14px; padding: 4px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.06); text-align: center; }
+  .title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .item { font-size: 16px; margin: 2px; text-align: center; }
+  .timeupload { font-size: 14px; color: #444; margin: 2px 0; }
+  .label { color: #666; font-size: 14px; margin-bottom: 6px; text-align: center; }
 
-  .grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
+  header { display: flex; flex-direction: column; align-items: center;
+    justify-content: center;    margin-bottom: 2px; }
+  .header-box { width: auto; }
 
-  .card {
-    background: white;
-    border-radius: 14px;
-    padding: 4px;
-    box-shadow: 0 6px 12px rgba(0,0,0,.06);
-    text-align: center;
-  }
-
-  .title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-
-  .item {
-    font-size: 16px;
-    margin: 2px;
-    text-align: center;
-  }
-
-  .timeupload {
-    font-size: 14px;
-    color: #444;
-    margin: 2px 0;
-  }
-
-  .label {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 6px;
-    text-align: center;
-  }
-
-  header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2px;
-  }
-
-  .header-box {
-    width: auto;
-  }
-
-  h1 {
-    font-size: 16px;
-    margin: 2px;
-  }
-
-  .clock {
-    font-size: 16px;
-    color: #333;
-  }
+  h1 { font-size: 16px; margin: 2px; }
+  .clock {  font-size: 16px; color: #333; }
 </style>
 </head>
 
 <body>
 
-<div class="label">(16)dashboard_828.</div>
+<div class="label">(16)dashboard_816.</div>
 
 <header>
   <div class="header-box">
@@ -174,46 +123,14 @@
 
 const CHANNELS = {
 
-  g1: {
-    id: 3015582,
-    read_key: "4KTWZ5HV3YTL7JE6"
-  },
-
-  g2: {
-    id: 3016776,
-    read_key: "0GYPNOPAHTLWY2FU"
-  },
-
-  g3: {
-    id: 3018897,
-    read_key: "8LPG5E9FMQBPMT95"
-  },
-
-  g4: {
-    id: 3020435,
-    read_key: "DQW527FW43D0I249"
-  },
-
-  n1: {
-    id: 3047574,
-    read_key: "3ZULDVNI47LM2XUU"
-  },
-
-  n2: {
-    id: 3047580,
-    read_key: "589U5K9LQDG7MMZO"
-  },
-
-  n3: {
-    id: 3047588,
-    read_key: "7JQ621N43OOEKA13"
-  },
-
-  n4: {
-    id: 3047591,
-    read_key: "WCREQ2P18WN27TUP"
-  }
-
+  g1: { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+  g2: { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  g3: { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+  g4: { id: 3020435, read_key: "DQW527FW43D0I249" },
+  n1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  n2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
+  n3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
+  n4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
 };
 
 
@@ -222,18 +139,14 @@ const CHANNELS = {
 // ========================================
 
 const DEVICES = [
-
   { key: "n1", icon: "🏠" },
   { key: "n2", icon: "🏢" },
   { key: "n3", icon: "🌴" },
   { key: "n4", icon: "🌷" },
-
   { key: "g1", icon: "🏢" },
   { key: "g2", icon: "🌞" },
   { key: "g3", icon: "🏢" },
-  { key: "g4", icon: "🌷" }
-
-];
+  { key: "g4", icon: "🌷" } ];
 
 
 // ========================================
@@ -251,132 +164,74 @@ function qsel(id) {
   return document.getElementById(id);
 }
 
-function pad(n) {
-  return n.toString().padStart(2, "0");
-}
-
+function pad(n) { return n.toString().padStart(2, "0");}
 
 // ========================================
 // 5. 날짜 및 시간
 // ========================================
 
 function fmtDateTime(dateStr) {
-
   const d = new Date(dateStr);
-
   if (isNaN(d.getTime())) return "--";
-
   const m = d.getMonth() + 1;
   const day = d.getDate();
-
   const h = pad(d.getHours());
   const min = pad(d.getMinutes());
   const s = pad(d.getSeconds());
-
-  return `${m}/${day}.${h}:${min}:${s}`;
-
-}
-
+  return `${m}/${day}.${h}:${min}:${s}`;}
 
 function fmtClockTime() {
-
   const d = new Date();
-
   return `${d.getFullYear()}.${d.getMonth()+1}.${d.getDate()}. ` +
-         `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-
-}
-
+         `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`; }
 
 // ========================================
 // 6. ThingSpeak 채널 이름 최초 1회 로딩
 // ========================================
 
 async function loadChannelNames() {
-
   const results = await Promise.allSettled(
-
     DEVICES.map(async (device) => {
-
       const ch = CHANNELS[device.key];
-
       const url =
         `https://api.thingspeak.com/channels/${ch.id}/feeds.json` +
         `?results=1&metadata=true&api_key=${encodeURIComponent(ch.read_key)}`;
-
       const res = await fetch(url);
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
+      if (!res.ok) { throw new Error(`HTTP ${res.status}`);  }
       const data = await res.json();
-
       if (!data.channel || !data.channel.name) {
-        throw new Error("채널 이름을 찾을 수 없습니다.");
-      }
-
-      return {
-        key: device.key,
-        name: data.channel.name
-      };
-
+        throw new Error("채널 이름을 찾을 수 없습니다."); }
+      return { key: device.key, name: data.channel.name };
     })
-
   );
 
-
   results.forEach((result, index) => {
-
     const device = DEVICES[index];
-
     if (result.status === "fulfilled") {
-
       const {key, name} = result.value;
-
       CHANNEL_NAMES[key] = name;
-
       console.log("채널 이름 로딩 성공:", key, name);
-
-    } else {
-
-      console.error(
-        "채널 이름 로딩 실패:",
-        device.key,
-        result.reason
-      );
-
-    }
-
+    } else {  console.error( "채널 이름 로딩 실패:",                      
+      device.key, result.reason );    }
   });
-
 }
-
 
 // ========================================
 // 7. 최신 측정값 가져오기
 // ========================================
 
 async function fetchLast(ch) {
-
   const url =
     `https://api.thingspeak.com/channels/${ch.id}/feeds/last.json` +
     `?api_key=${encodeURIComponent(ch.read_key)}`;
 
   const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
+  if (!res.ok) { throw new Error(`HTTP ${res.status}`);
   }
-
   const data = await res.json();
-
   if (!data.created_at) {
-    throw new Error("측정 데이터가 없습니다.");
-  }
-
+    throw new Error("측정 데이터가 없습니다.");  }
   return data;
-
 }
 
 
@@ -385,55 +240,26 @@ async function fetchLast(ch) {
 // ========================================
 
 function displayValue(key, icon, name, type, value, unit) {
-
   const element = qsel(`${key}_${type}`);
-
   if (!element) return;
-
-  element.textContent =
-    `${icon} ${name}: ${value} ${unit}`;
-
-}
-
+  element.textContent = `${icon} ${name}: ${value} ${unit}`;}
 
 // ========================================
 // 9. 8개 채널 측정값 업데이트
 // ========================================
 
 async function update() {
-
-  const results = await Promise.allSettled(
-
+    const results = await Promise.allSettled(
     DEVICES.map(async (device) => {
-
       const feed = await fetchLast(CHANNELS[device.key]);
-
-      return {
-        device,
-        feed
-      };
-
-    })
-
-  );
-
+      return { device, feed };  })  );
 
   results.forEach((result, index) => {
-
     if (result.status !== "fulfilled") {
-
-      console.error(
-        "측정값 업데이트 실패:",
-        DEVICES[index].key,
-        result.reason
-      );
-
-      return;
-
-    }
-
+      console.error( "측정값 업데이트 실패:",
+        DEVICES[index].key,  result.reason  );
+      return;  }
     const {device, feed} = result.value;
-
     const key = device.key;
     const icon = device.icon;
 
@@ -441,80 +267,45 @@ async function update() {
     // 이름을 아직 가져오지 못했다면 임시 이름 사용
 
     const name = CHANNEL_NAMES[key] || key;
-
-
     // -------------------------
     // 온도 field2
     // -------------------------
-
     const temp = Number(feed.field2);
-
-    displayValue(
-      key, icon, name,
-      "temp",
-      Number.isFinite(temp) ? temp.toFixed(1) : "--",
-      "℃"
-    );
-
+    displayValue( key, icon, name, "temp",
+                 Number.isFinite(temp) ? temp.toFixed(1) : "--", "℃"  );
 
     // -------------------------
     // 조명 field1
     // -------------------------
-
     const lux = Number(feed.field1);
-
-    displayValue(
-      key, icon, name,
-      "lux",
-      Number.isFinite(lux) ? Math.round(lux) : "--",
-      "Lx"
-    );
+    displayValue( key, icon, name, "lux",
+      Number.isFinite(lux) ? Math.round(lux) : "--", "Lx" );
 
 
     // -------------------------
     // 습도 field3
     // -------------------------
-
     const hum = Number(feed.field3);
-
-    displayValue(
-      key, icon, name,
-      "hum",
-      Number.isFinite(hum) ? Math.round(hum) : "--",
-      "%"
-    );
-
+    displayValue( key, icon, name, "hum", Number.isFinite(hum) ? Math.round(hum) : "--", "%" );
 
     // -------------------------
     // 업로드 시간
     // -------------------------
-
     qsel(`${key}_timeupload`).textContent =
-      `${icon} ${name}: ${fmtDateTime(feed.created_at)}`;
-
-  });
-
-}
-
+      `${icon} ${name}: ${fmtDateTime(feed.created_at)}`; });}
 
 // ========================================
 // 10. 실시간 시계
 // ========================================
 
 function tickClock() {
-
   const time = fmtClockTime();
-
   document.querySelectorAll(".clock").forEach(el => {
-    el.textContent = time;
-  });
-
+    el.textContent = time; });
 }
 
 tickClock();
-
 setInterval(tickClock, 1000);
-
 
 // ========================================
 // 11. 최초 실행
@@ -524,20 +315,12 @@ setInterval(tickClock, 1000);
 // 이름 로딩이 끝난 뒤 측정값 업데이트 시작
 
 async function startDashboard() {
-
   await loadChannelNames();
-
   await update();
-
   // 측정값만 10초마다 갱신
-  setInterval(update, 10000);
-
-}
-
+  setInterval(update, 10000);}
 startDashboard();
-
 </script>
 
 </body>
 </html>
-
