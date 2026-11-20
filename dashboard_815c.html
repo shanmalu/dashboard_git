@@ -7,58 +7,18 @@
 <title>(12)815.채널8개.조명온도</title>
 
 <style>
-  body {
-    font-family: system-ui, sans-serif;
-    margin: 12px;
-    background: #f7f7f9;
-  }
+  body {font-family: system-ui, sans-serif;    margin: 12px;    background: #f7f7f9;  }
+  .grid {    display: grid;    gap: 12px;    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));  }
+  .card { background: white;  border-radius: 14px; padding: 8px; box-shadow: 0 6px 12px rgba(0,0,0,.06);  }
+  .title { font-size: 16px; margin-bottom: 6px;}
+  .value { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .label { color: #666; font-size: 14px; margin-bottom: 20px; text-align: center; }
+  .time { font-size: 14px; color: #444; margin: 2px 0; }
 
-  .grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
-
-  .card {
-    background: white;
-    border-radius: 14px;
-    padding: 8px;
-    box-shadow: 0 6px 12px rgba(0,0,0,.06);
-  }
-
-  .title {
-    font-size: 16px;
-    margin-bottom: 6px;
-  }
-
-  .value {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
-  .label {
-    color: #666;
-    font-size: 14px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .time {
-    font-size: 14px;
-    color: #444;
-    margin: 2px 0;
-  }
-
-  header {
-    display: flex;
+  header { display: flex;
     align-items: center;
-    margin-bottom: 10px;
-  }
-
-  .header-box {
-    text-align: center;
-  }
+    margin-bottom: 10px; }
+  .header-box { text-align: center; }
 
   h1 {
     font-size: 16px;
@@ -203,48 +163,31 @@ const TITLE_IDS = {
 // 3. 공통 함수
 // ========================================
 
-function qsel(id) {
-  return document.getElementById(id);
-}
-
-function pad(n) {
-  return n.toString().padStart(2, "0");
-}
-
+function qsel(id) { return document.getElementById(id);}
+function pad(n) {  return n.toString().padStart(2, "0");}
 
 // ========================================
 // 4. 날짜 및 시간 표시
 // ========================================
 
 function fmtDateTime(dateStr) {
-  try {
-    const d = new Date(dateStr);
-
+  try { const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
-
     const y = String(d.getFullYear()).slice(2);
     const m = d.getMonth() + 1;
     const day = d.getDate();
-
     const h = pad(d.getHours());
     const min = pad(d.getMinutes());
     const s = pad(d.getSeconds());
-
-    return `${y}.${m}.${day}. ${h}:${min}:${s}`;
-
-  } catch (e) {
-    return dateStr;
-  }
-}
-
+ return `${y}.${m}.${day}. ${h}:${min}:${s}`;  } 
+ catch (e) { return dateStr;  }
+ }
 
 function fmtClockTime() {
   const d = new Date();
-
   const y = String(d.getFullYear()).slice(2);
   const m = d.getMonth() + 1;
   const day = d.getDate();
-
   const h = pad(d.getHours());
   const min = pad(d.getMinutes());
   const s = pad(d.getSeconds());
@@ -252,82 +195,44 @@ function fmtClockTime() {
   return `${y}.${m}.${day}. ${h}:${min}:${s}`;
 }
 
-
 // ========================================
 // 5. ThingSpeak 채널 이름 가져오기
 // 최초 1회 실행
 // ========================================
 
-async function fetchChannelName({id, read_key}) {
-
-  const url =
-    `https://api.thingspeak.com/channels/${id}.json?api_key=${read_key}`;
-
+async function fetchChannelName({id, read_key})
+{
+  const url = `https://api.thingspeak.com/channels/${id}.json?api_key=${read_key}`;
   const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
-  }
-
-  const data = await res.json();
-
-  if (!data.name) {
-    throw new Error("채널 이름이 없습니다.");
-  }
-
+  if (!res.ok) {  throw new Error(`HTTP ${res.status}`); }
+  const data = await res.json(); 
+  if (!data.name) { throw new Error("채널 이름이 없습니다."); }
   return data.name;
 }
 
-
 async function loadChannelNames() {
-
   const results = await Promise.allSettled(
-    Object.entries(CHANNELS).map(async ([key, ch]) => {
-
+    Object.entries(CHANNELS).map(async ([key, ch]) => { 
       const name = await fetchChannelName(ch);
-
-      return {key, name};
-
-    })
-  );
-
-  results.forEach((result) => {
-
+      return {key, name};  } ) );
+    results.forEach((result) => {
     if (result.status === "fulfilled") {
-
       const {key, name} = result.value;
-
-      qsel(TITLE_IDS[key]).textContent = name;
-
-    } else {
-
-      console.log("채널 이름 로딩 오류:", result.reason);
-
-    }
-
+      qsel(TITLE_IDS[key]).textContent = name; } 
+    else { console.log("채널 이름 로딩 오류:", result.reason); }
   });
-
 }
-
 
 // ========================================
 // 6. 최근 측정값 가져오기
 // ========================================
 
 async function fetchLastFeed({id, read_key}) {
-
-  const url =
-    `https://api.thingspeak.com/channels/${id}/feeds/last.json?api_key=${read_key}`;
-
+  const url = `https://api.thingspeak.com/channels/${id}/feeds/last.json?api_key=${read_key}`;
   const res = await fetch(url);
-
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status}`);
-  }
-
+  if (!res.ok) { throw new Error(`HTTP ${res.status}`); }
   return res.json();
 }
-
 
 // ========================================
 // 7. 측정값 화면 업데이트
@@ -368,24 +273,14 @@ async function update() {
       naver4: "n4"
     }[key];
 
-    if (!prefix) return;
-
-    qsel(`${prefix}_lux`).textContent =
-      ` 💡조명: ${Math.round(+feed.field1 || 0)} Lux`;
-
-    qsel(`${prefix}_temp`).textContent =
-      ` 🌡️온도: ${(+feed.field2 || 0).toFixed(1)} ℃`;
-
-    qsel(`${prefix}_hum`).textContent =
-      ` 💧습도: ${Math.round(+feed.field3 || 0)} %`;
-
-    qsel(`${prefix}_time`).textContent =
-      ` update: ${fmtDateTime(feed.created_at)}`;
-
+    if (!prefix) return; 
+    qsel(`${prefix}_lux`).textContent =  ` 💡조명: ${Math.round(+feed.field1 || 0)} Lux`;
+    qsel(`${prefix}_temp`).textContent = ` 🌡️온도: ${(+feed.field2 || 0).toFixed(1)} ℃`;
+    qsel(`${prefix}_hum`).textContent =  ` 💧습도: ${Math.round(+feed.field3 || 0)} %`;
+    qsel(`${prefix}_time`).textContent = ` update: ${fmtDateTime(feed.created_at)}`;
   });
 
 }
-
 
 // ========================================
 // 8. 실시간 시계
@@ -397,7 +292,6 @@ function tickClock() {
 
 setInterval(tickClock, 1000);
 tickClock();
-
 
 // ========================================
 // 9. 최초 실행 및 주기 설정
@@ -414,7 +308,6 @@ setInterval(update, 10000);
 
 </body>
 </html>
-
 
 </script>
 
