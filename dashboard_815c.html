@@ -1,0 +1,102 @@
+#include <ESP8266WiFi.h>
+#include <DHT.h>
+#include <Wire.h>
+#include <BH1750.h>
+#include <WiFiClient.h>
+#include <ThingSpeak.h>
+
+// --- WiFi 설정 ---
+const char* ssid = "SK_WIFIGIGA33B8";
+const char* password = "2009055395";
+
+// --- ThingSpeak 설정 ---
+unsigned long channelID_Home = 3020435;             // 집 채널4
+const char* writeAPIKey_Home = "7EHNA2ZV1VSJ5EPS";  
+
+unsigned long channelID_Greenhouse = 3018897;       // 온실 채널3
+const char* writeAPIKey_Greenhouse = "6XLMISMHDW7MD1GJ";
+
+// --- 센서 설정 ---
+#define DHTPIN 14
+#define DHTTYPE DHT22
+DHT dht(DHTPIN, DHTTYPE);
+BH1750 lightMeter;
+
+// --- 클라이언트 ---
+WiFiClient client;
+
+unsigned long lastUpdateTime = 0;
+const unsigned long updateInterval = 20000;
+
+void connectToWiFi() {
+  Serial.print("📶 WiFi 연결 시도 중: ");
+  WiFi.begin(ssid, password);
+
+  int attempt = 0;
+  while (WiFi.status() != WL_CONNECTED && attempt < 20) {
+    delay(500);
+    Serial.print(".");
+    attempt++;
+  }
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("\n✅ WiFi 연결 성공. IP 주소: " + WiFi.localIP().toString());
+  } else {
+    Serial.println("\n❌ WiFi 연결 실패! 재시작...");
+    ESP.restart();  // 실패 시 자동 재부팅
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  connectToWiFi(); // 가장 먼저 WiFi 연결
+
+  dht.begin();
+  Wire.begin(4, 5); // SDA, SCL
+  lightMeter.begin();
+
+  ThingSpeak.begin(client);
+}
+
+void loop() {
+  if (millis() - lastUpdateTime >= updateInterval) {
+    lastUpdateTime = millis();
+
+    float h = dht.readHumidity();
+    float t = dht.readTemperature();
+    uint16_t lux = lightMeter.readLightLevel();
+
+    if (isnan(h) || isnan(t)) {
+      Serial.println("❌ 센서 에러: 값 읽기 실패");
+      return;
+    }
+
+    Serial.printf("📡 측정값 - 조도: %d lux, 온도: %.1f ℃, 습도: %.0f %%\n", lux, t, h);
+
+    // --- 집 채널4 전송 (Field 1,2,3) ---
+    ThingSpeak.setField(1, lux);
+    ThingSpeak.setField(2, t);
+    ThingSpeak.setField(3, h);
+    int resHome = ThingSpeak.writeFields(channelID_Home, writeAPIKey_Home);
+    if (resHome == 200) {
+      Serial.println("✅ 집 채널4 전송 성공");
+    } else {
+      Serial.printf("⚠️ 집 채널4 전송 실패: %d\n", resHome);
+    }
+
+    // --- 온실 채널3 전송 (Field 4,5,6) ---
+    ThingSpeak.setField(4, lux);
+    ThingSpeak.setField(5, t);
+    ThingSpeak.setField(6, h);
+    int resGreen = ThingSpeak.writeFields(channelID_Greenhouse, writeAPIKey_Greenhouse);
+    if (resGreen == 200) {
+      Serial.println("✅ 온실 채널3 전송 성공");
+    } else {
+      Serial.printf("⚠️ 온실 채널3 전송 실패: %d\n", resGreen);
+    }
+  }
+
+  delay(100);
+}
