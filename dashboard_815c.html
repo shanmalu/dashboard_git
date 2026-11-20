@@ -1,102 +1,415 @@
-#include <ESP8266WiFi.h>
-#include <DHT.h>
-#include <Wire.h>
-#include <BH1750.h>
-#include <WiFiClient.h>
-#include <ThingSpeak.h>
 
-// --- WiFi 설정 ---
-const char* ssid = "SK_WIFIGIGA33B8";
-const char* password = "2009055395";
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>(12)815.채널8개.조명온도</title>
 
-// --- ThingSpeak 설정 ---
-unsigned long channelID_Home = 3020435;             // 집 채널4
-const char* writeAPIKey_Home = "7EHNA2ZV1VSJ5EPS";  
-
-unsigned long channelID_Greenhouse = 3018897;       // 온실 채널3
-const char* writeAPIKey_Greenhouse = "6XLMISMHDW7MD1GJ";
-
-// --- 센서 설정 ---
-#define DHTPIN 14
-#define DHTTYPE DHT22
-DHT dht(DHTPIN, DHTTYPE);
-BH1750 lightMeter;
-
-// --- 클라이언트 ---
-WiFiClient client;
-
-unsigned long lastUpdateTime = 0;
-const unsigned long updateInterval = 20000;
-
-void connectToWiFi() {
-  Serial.print("📶 WiFi 연결 시도 중: ");
-  WiFi.begin(ssid, password);
-
-  int attempt = 0;
-  while (WiFi.status() != WL_CONNECTED && attempt < 20) {
-    delay(500);
-    Serial.print(".");
-    attempt++;
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 12px;
+    background: #f7f7f9;
   }
 
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\n✅ WiFi 연결 성공. IP 주소: " + WiFi.localIP().toString());
-  } else {
-    Serial.println("\n❌ WiFi 연결 실패! 재시작...");
-    ESP.restart();  // 실패 시 자동 재부팅
+  .grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 6px 12px rgba(0,0,0,.06);
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .value {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .label {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .time {
+    font-size: 14px;
+    color: #444;
+    margin: 2px 0;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .header-box {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .clock {
+    font-size: 16px;
+    color: #333;
+  }
+</style>
+
+<body>
+
+<div class="label">File: dashboard_815.</div>
+
+<header>
+  <div class="header-box">
+    <h1>📊 실시간&nbsp;측정치&nbsp;</h1>
+  </div>
+
+  <div class="header-box">
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- naver1 -->
+  <div class="card" id="naver1">
+    <div class="title" id="n1_title">🏠 불러오는 중...</div>
+    <div class="value" id="n1_lux">-- Lx</div>
+    <div class="value" id="n1_temp">-- ℃</div>
+    <div class="value" id="n1_hum">-- %</div>
+    <div class="time" id="n1_time">시간: --</div>
+  </div>
+
+  <!-- naver2 -->
+  <div class="card" id="naver2">
+    <div class="title" id="n2_title">🧪 불러오는 중...</div>
+    <div class="value" id="n2_lux">-- Lx</div>
+    <div class="value" id="n2_temp">-- ℃</div>
+    <div class="value" id="n2_hum">-- %</div>
+    <div class="time" id="n2_time">시간: --</div>
+  </div>
+
+  <!-- naver3 -->
+  <div class="card" id="naver3">
+    <div class="title" id="n3_title">🌿 불러오는 중...</div>
+    <div class="value" id="n3_lux">-- Lx</div>
+    <div class="value" id="n3_temp">-- ℃</div>
+    <div class="value" id="n3_hum">-- %</div>
+    <div class="time" id="n3_time">시간: --</div>
+  </div>
+
+  <!-- naver4 -->
+  <div class="card" id="naver4">
+    <div class="title" id="n4_title">🌿 불러오는 중...</div>
+    <div class="value" id="n4_lux">-- Lx</div>
+    <div class="value" id="n4_temp">-- ℃</div>
+    <div class="value" id="n4_hum">-- %</div>
+    <div class="time" id="n4_time">시간: --</div>
+  </div>
+
+  <!-- gma1 -->
+  <div class="card" id="gma1">
+    <div class="title" id="g1v_title">🏢 불러오는 중...</div>
+    <div class="value" id="g1v_lux">-- Lx</div>
+    <div class="value" id="g1v_temp">-- ℃</div>
+    <div class="value" id="g1v_hum">-- %</div>
+    <div class="time" id="g1v_time">시간: --</div>
+  </div>
+
+  <!-- gma2 -->
+  <div class="card" id="gma2">
+    <div class="title" id="g2o_title">🏠 불러오는 중...</div>
+    <div class="value" id="g2o_lux">-- Lx</div>
+    <div class="value" id="g2o_temp">-- ℃</div>
+    <div class="value" id="g2o_hum">-- %</div>
+    <div class="time" id="g2o_time">시간: --</div>
+  </div>
+
+  <!-- gma3 -->
+  <div class="card" id="gma3">
+    <div class="title" id="g3g_title">🌿 불러오는 중...</div>
+    <div class="value" id="g3g_lux">-- Lx</div>
+    <div class="value" id="g3g_temp">-- ℃</div>
+    <div class="value" id="g3g_hum">-- %</div>
+    <div class="time" id="g3g_time">시간: --</div>
+  </div>
+
+  <!-- gma4 -->
+  <div class="card" id="gma4">
+    <div class="title" id="g4h_title">🏢 불러오는 중...</div>
+    <div class="value" id="g4h_lux">-- Lx</div>
+    <div class="value" id="g4h_temp">-- ℃</div>
+    <div class="value" id="g4h_hum">-- %</div>
+    <div class="time" id="g4h_time">시간: --</div>
+  </div>
+
+</div>
+
+<div class="label">File: dashboard_815.</div>
+
+<script>
+
+// ========================================
+// 1. ThingSpeak 채널 정보
+// ========================================
+
+const CHANNELS = {
+  gma3:   { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
+  gma2:   { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
+  gma4:   { id: 3020435, read_key: "DQW527FW43D0I249" },
+  gma1:   { id: 3015582, read_key: "4KTWZ5HV3YTL7JE6" },
+
+  naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
+  naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
+  naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
+  naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
+};
+
+
+// ========================================
+// 2. Card 제목 연결
+// ========================================
+
+const TITLE_IDS = {
+  gma1: "g1v_title",
+  gma2: "g2o_title",
+  gma3: "g3g_title",
+  gma4: "g4h_title",
+
+  naver1: "n1_title",
+  naver2: "n2_title",
+  naver3: "n3_title",
+  naver4: "n4_title"
+};
+
+
+// ========================================
+// 3. 공통 함수
+// ========================================
+
+function qsel(id) {
+  return document.getElementById(id);
+}
+
+function pad(n) {
+  return n.toString().padStart(2, "0");
+}
+
+
+// ========================================
+// 4. 날짜 및 시간 표시
+// ========================================
+
+function fmtDateTime(dateStr) {
+  try {
+    const d = new Date(dateStr);
+
+    if (isNaN(d.getTime())) return dateStr;
+
+    const y = String(d.getFullYear()).slice(2);
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+
+    const h = pad(d.getHours());
+    const min = pad(d.getMinutes());
+    const s = pad(d.getSeconds());
+
+    return `${y}.${m}.${day}. ${h}:${min}:${s}`;
+
+  } catch (e) {
+    return dateStr;
   }
 }
 
-void setup() {
-  Serial.begin(115200);
-  delay(1000);
 
-  connectToWiFi(); // 가장 먼저 WiFi 연결
+function fmtClockTime() {
+  const d = new Date();
 
-  dht.begin();
-  Wire.begin(4, 5); // SDA, SCL
-  lightMeter.begin();
+  const y = String(d.getFullYear()).slice(2);
+  const m = d.getMonth() + 1;
+  const day = d.getDate();
 
-  ThingSpeak.begin(client);
+  const h = pad(d.getHours());
+  const min = pad(d.getMinutes());
+  const s = pad(d.getSeconds());
+
+  return `${y}.${m}.${day}. ${h}:${min}:${s}`;
 }
 
-void loop() {
-  if (millis() - lastUpdateTime >= updateInterval) {
-    lastUpdateTime = millis();
 
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();
-    uint16_t lux = lightMeter.readLightLevel();
+// ========================================
+// 5. ThingSpeak 채널 이름 가져오기
+// 최초 1회 실행
+// ========================================
 
-    if (isnan(h) || isnan(t)) {
-      Serial.println("❌ 센서 에러: 값 읽기 실패");
+async function fetchChannelName({id, read_key}) {
+
+  const url =
+    `https://api.thingspeak.com/channels/${id}.json?api_key=${read_key}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  if (!data.name) {
+    throw new Error("채널 이름이 없습니다.");
+  }
+
+  return data.name;
+}
+
+
+async function loadChannelNames() {
+
+  const results = await Promise.allSettled(
+    Object.entries(CHANNELS).map(async ([key, ch]) => {
+
+      const name = await fetchChannelName(ch);
+
+      return {key, name};
+
+    })
+  );
+
+  results.forEach((result) => {
+
+    if (result.status === "fulfilled") {
+
+      const {key, name} = result.value;
+
+      qsel(TITLE_IDS[key]).textContent = name;
+
+    } else {
+
+      console.log("채널 이름 로딩 오류:", result.reason);
+
+    }
+
+  });
+
+}
+
+
+// ========================================
+// 6. 최근 측정값 가져오기
+// ========================================
+
+async function fetchLastFeed({id, read_key}) {
+
+  const url =
+    `https://api.thingspeak.com/channels/${id}/feeds/last.json?api_key=${read_key}`;
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
+
+  return res.json();
+}
+
+
+// ========================================
+// 7. 측정값 화면 업데이트
+// 10초마다 실행
+// ========================================
+
+async function update() {
+
+  const entries = Object.entries(CHANNELS);
+
+  const results = await Promise.allSettled(
+    entries.map(async ([key, ch]) => {
+
+      const feed = await fetchLastFeed(ch);
+
+      return {key, feed};
+
+    })
+  );
+
+  results.forEach((result) => {
+
+    if (result.status !== "fulfilled") {
+      console.log("측정값 업데이트 오류:", result.reason);
       return;
     }
 
-    Serial.printf("📡 측정값 - 조도: %d lux, 온도: %.1f ℃, 습도: %.0f %%\n", lux, t, h);
+    const {key, feed} = result.value;
 
-    // --- 집 채널4 전송 (Field 1,2,3) ---
-    ThingSpeak.setField(1, lux);
-    ThingSpeak.setField(2, t);
-    ThingSpeak.setField(3, h);
-    int resHome = ThingSpeak.writeFields(channelID_Home, writeAPIKey_Home);
-    if (resHome == 200) {
-      Serial.println("✅ 집 채널4 전송 성공");
-    } else {
-      Serial.printf("⚠️ 집 채널4 전송 실패: %d\n", resHome);
-    }
+    const prefix = {
+      gma1: "g1v",
+      gma2: "g2o",
+      gma3: "g3g",
+      gma4: "g4h",
+      naver1: "n1",
+      naver2: "n2",
+      naver3: "n3",
+      naver4: "n4"
+    }[key];
 
-    // --- 온실 채널3 전송 (Field 4,5,6) ---
-    ThingSpeak.setField(4, lux);
-    ThingSpeak.setField(5, t);
-    ThingSpeak.setField(6, h);
-    int resGreen = ThingSpeak.writeFields(channelID_Greenhouse, writeAPIKey_Greenhouse);
-    if (resGreen == 200) {
-      Serial.println("✅ 온실 채널3 전송 성공");
-    } else {
-      Serial.printf("⚠️ 온실 채널3 전송 실패: %d\n", resGreen);
-    }
-  }
+    if (!prefix) return;
 
-  delay(100);
+    qsel(`${prefix}_lux`).textContent =
+      ` 💡조명: ${Math.round(+feed.field1 || 0)} Lux`;
+
+    qsel(`${prefix}_temp`).textContent =
+      ` 🌡️온도: ${(+feed.field2 || 0).toFixed(1)} ℃`;
+
+    qsel(`${prefix}_hum`).textContent =
+      ` 💧습도: ${Math.round(+feed.field3 || 0)} %`;
+
+    qsel(`${prefix}_time`).textContent =
+      ` update: ${fmtDateTime(feed.created_at)}`;
+
+  });
+
 }
+
+
+// ========================================
+// 8. 실시간 시계
+// ========================================
+
+function tickClock() {
+  qsel("clock").textContent = fmtClockTime();
+}
+
+setInterval(tickClock, 1000);
+tickClock();
+
+
+// ========================================
+// 9. 최초 실행 및 주기 설정
+// ========================================
+
+// 채널 이름은 페이지 로딩 시 최초 1회
+loadChannelNames();
+
+// 측정값은 최초 실행 후 10초마다 갱신
+update();
+setInterval(update, 10000);
+
+</script>
+
+</body>
+</html>
