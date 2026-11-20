@@ -166,16 +166,23 @@ function fmtClockTime() {
 // ========================================
 // 5. ThingSpeak 채널 이름 가져오기
 // 최초 1회 실행
+  
+// ThingSpeak 채널 이름 가져오기
+// Read API Key + metadata=true 사용
 
-async function fetchChannelName({id, read_key}){
-  const url = `https://api.thingspeak.com/channels/${id}.json?api_key=${read_key}`;
+async function fetchChannelName({id, read_key}) { 
+  const url =
+    `https://api.thingspeak.com/channels/${id}/feeds.json` +
+    `?results=1&metadata=true&api_key=${encodeURIComponent(read_key)}`;
+  
   const res = await fetch(url);
-  if (!res.ok) {  throw new Error(`HTTP ${res.status}`); }
-  const data = await res.json(); 
-  if (!data.name) { throw new Error("채널 이름이 없습니다."); }
-  return data.name;
+  if (!res.ok) { throw new Error(`HTTP ${res.status}`);  }
+  const data = await res.json();
+  if (!data.channel || !data.channel.name) {
+    throw new Error(  `채널 이름 응답 오류: ${JSON.stringify(data)}` );  }
+  return data.channel.name;
 }
-
+  
 async function loadChannelNames() {
   const results = await Promise.allSettled(
     Object.entries(CHANNELS).map(async ([key, ch]) => { 
