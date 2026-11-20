@@ -261,31 +261,21 @@ async function update() {
     // 이름을 아직 가져오지 못했다면 임시 이름 사용
 
     const name = CHANNEL_NAMES[key] || key;
-    // -------------------------
+
     // 온도 field2
-    // -------------------------
     const temp = Number(feed.field2);
-    displayValue( key, icon, name, "temp",
-                 Number.isFinite(temp) ? temp.toFixed(1) : "--", "℃"  );
+    displayValue( key, icon, name, "temp", Number.isFinite(temp) ? temp.toFixed(1) : "--", "℃"  );
 
-    // -------------------------
     // 조명 field1
-    // -------------------------
     const lux = Number(feed.field1);
-    displayValue( key, icon, name, "lux",
-      Number.isFinite(lux) ? Math.round(lux) : "--", "Lx" );
+    displayValue( key, icon, name, "lux", Number.isFinite(lux) ? Math.round(lux) : "--", "Lx" );
 
-    // -------------------------
     // 습도 field3
-    // -------------------------
     const hum = Number(feed.field3);
     displayValue( key, icon, name, "hum", Number.isFinite(hum) ? Math.round(hum) : "--", "%" );
 
-    // -------------------------
     // 업로드 시간
-    // -------------------------
-    qsel(`${key}_timeupload`).textContent =
-      `${icon} ${name}: ${fmtDateTime(feed.created_at)}`; });}
+    qsel(`${key}_timeupload`).textContent = `${icon} ${name}: ${fmtDateTime(feed.created_at)}`; });}
 
 // ========================================
 // 10. 실시간 시계
@@ -293,9 +283,7 @@ async function update() {
 
 function tickClock() {
   const time = fmtClockTime();
-  document.querySelectorAll(".clock").forEach(el => {
-    el.textContent = time; });
-}
+  document.querySelectorAll(".clock").forEach(el => { el.textContent = time; });}
 
 tickClock();
 setInterval(tickClock, 1000);
