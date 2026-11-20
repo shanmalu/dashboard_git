@@ -16,27 +16,20 @@
     margin-bottom: 10px; }
   .header-box { text-align: center; }
 
-  h1 {
-    font-size: 16px;
-    margin: 0;
-  }
-
-  .clock {
-    font-size: 16px;
-    color: #333;
-  }
+  h1 { font-size: 16px; margin: 0;}
+  .clock { font-size: 16px; color: #333; }
 </style>
 
 <body>
-<div class="label">File: dashboard_815.</div>
+<div class="label">File: dashboard_815c.</div>
 
 <header>
   <div class="header-box">
     <h1>📊 실시간&nbsp;측정치&nbsp;</h1>   </div>
 
   <div class="header-box">
-    <div class="clock" id="clock">--:--:--</div>
-  </div> </header>
+    <div class="clock" id="clock">--:--:--</div>   </div>
+</header>
 
 <div class="grid">
 
@@ -109,10 +102,9 @@
 
 <script>
 
-// ========================================
+// ==============================
 // 1. ThingSpeak 채널 정보
-// ========================================
-
+// ==============================
 const CHANNELS = {
   gma3:   { id: 3018897, read_key: "8LPG5E9FMQBPMT95" },
   gma2:   { id: 3016776, read_key: "0GYPNOPAHTLWY2FU" },
@@ -122,9 +114,7 @@ const CHANNELS = {
   naver1: { id: 3047574, read_key: "3ZULDVNI47LM2XUU" },
   naver2: { id: 3047580, read_key: "589U5K9LQDG7MMZO" },
   naver3: { id: 3047588, read_key: "7JQ621N43OOEKA13" },
-  naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" }
-};
-
+  naver4: { id: 3047591, read_key: "WCREQ2P18WN27TUP" } };
 
 // ========================================
 // 2. Card 제목 연결
@@ -139,23 +129,18 @@ const TITLE_IDS = {
   naver1: "n1_title",
   naver2: "n2_title",
   naver3: "n3_title",
-  naver4: "n4_title"
-};
-
+  naver4: "n4_title" };
 
 // ========================================
 // 3. 공통 함수
-// ========================================
-
 function qsel(id) { return document.getElementById(id);}
 function pad(n) {  return n.toString().padStart(2, "0");}
 
 // ========================================
 // 4. 날짜 및 시간 표시
-// ========================================
-
 function fmtDateTime(dateStr) {
-  try { const d = new Date(dateStr);
+  try {
+    const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
     const y = String(d.getFullYear()).slice(2);
     const m = d.getMonth() + 1;
@@ -163,7 +148,7 @@ function fmtDateTime(dateStr) {
     const h = pad(d.getHours());
     const min = pad(d.getMinutes());
     const s = pad(d.getSeconds());
- return `${y}.${m}.${day}. ${h}:${min}:${s}`;  } 
+    return `${y}.${m}.${day}. ${h}:${min}:${s}`;  } 
  catch (e) { return dateStr;  }
  }
 
@@ -175,17 +160,14 @@ function fmtClockTime() {
   const h = pad(d.getHours());
   const min = pad(d.getMinutes());
   const s = pad(d.getSeconds());
-
   return `${y}.${m}.${day}. ${h}:${min}:${s}`;
 }
 
 // ========================================
 // 5. ThingSpeak 채널 이름 가져오기
 // 최초 1회 실행
-// ========================================
 
-async function fetchChannelName({id, read_key})
-{
+async function fetchChannelName({id, read_key}){
   const url = `https://api.thingspeak.com/channels/${id}.json?api_key=${read_key}`;
   const res = await fetch(url);
   if (!res.ok) {  throw new Error(`HTTP ${res.status}`); }
@@ -224,28 +206,17 @@ async function fetchLastFeed({id, read_key}) {
 // ========================================
 
 async function update() {
-
   const entries = Object.entries(CHANNELS);
-
   const results = await Promise.allSettled(
     entries.map(async ([key, ch]) => {
-
       const feed = await fetchLastFeed(ch);
-
-      return {key, feed};
-
-    })
-  );
+      return {key, feed};    })   );
 
   results.forEach((result) => {
-
     if (result.status !== "fulfilled") {
       console.log("측정값 업데이트 오류:", result.reason);
-      return;
-    }
-
+      return;  }
     const {key, feed} = result.value;
-
     const prefix = {
       gma1: "g1v",
       gma2: "g2o",
